@@ -5,7 +5,7 @@ import { Mail ,Lock} from "lucide-react";
 
 
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 import {StartUserFunctionApi,StartUserFunctionApiWithFirebase} from "../src/redux_store/User_redux/User_function";
 import { useSelector } from "react-redux";
@@ -13,45 +13,49 @@ import { isAuthenticated , user as users,loading as load,error as err} from "../
 
 import {useDispatch} from "react-redux";
 
+
 export const Login = () => {
 
    const loading = useSelector(load);
    const user = useSelector(users);
    const isAuth = useSelector(isAuthenticated);
    const error = useSelector(err);
+   
 
    
    const navigate = useNavigate();
+   const location = useLocation();
+   const from = location.state?.from?.pathname || "/explore";
+
    const dispatch = useDispatch();
    // console.log("this is enter the login",user)
 
-   console.log("is loading in login",loading);
-   useEffect(() => {
-      if (isAuth) {
-         console.log("User is authenticated, navigating to dashboard");
 
-         navigate("/user-dashboard");
-         // return null // Prevent rendering the login component
-      }
-   }, [isAuth,navigate]);
+   // useEffect(() => {
+   //    if (isAuth) {
+   //       // console.log("User is authenticated, navigating to dashboard");
 
-   // if (!user) return null;
+   //       navigate("/explore");
+   //       // return null // Prevent rendering the login component
+   //    }
+   // }, [isAuth,navigate]);
+
+
 
 
    const loginWithGoogle = ()=>{
-      console.log("Login with Google clicked");
       dispatch(StartUserFunctionApiWithFirebase())
       .then(() => {
-         console.log("Login successful, navigating to dashboard");
-         navigate("/user-dashboard");
+         console.log("Google login successful, navigating to:", from);
+         navigate(from, { replace: true });
       })
       .catch((error) => {
          console.error("Google Login Failed:", error);
          dispatch(loginFailure(error.message));
+
       });
    }
       // useAuth();
-      
 
    const [formData, setFormData] =
       useState({
@@ -70,6 +74,7 @@ export const Login = () => {
      
 
    };
+      console.log('loading',loading);
 
    const handleSubmit = async (e) => {
 
@@ -85,11 +90,15 @@ export const Login = () => {
    if (loading) {
       return (
          <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black"></div>
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black"> rotate</div>
          </div>
       );
    }
 
+   // if (!isAuth) {
+   //    console.log("User is authenticated, navigating to dashboard");
+   //    navigate("/user-dashboard");
+      // return null; // Prevent rendering the login component
    return (
 
       <div
@@ -380,7 +389,8 @@ export const Login = () => {
       </div>
 
    );
+   // }÷
 
 };
 
-export default Login;
+export default Login;  

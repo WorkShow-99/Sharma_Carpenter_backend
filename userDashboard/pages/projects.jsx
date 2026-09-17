@@ -3,11 +3,30 @@ import {useState, useEffect } from "react";
 import { useAuth } from "../../context/auth_context";
 import userImage from "../../src/assets/images/user.png";
 import {AddProjectLayer} from "./add_project_layer";
+import {user,isAuthenticated} from "../../src/redux_store/User_redux/Uesr_get";
+import { useSelector } from "react-redux";
+
+
+
 
 
 export const Projects_view = () => {
 
     const [onLayer, setonLayer] = useState(false);
+    const users = useSelector(user);
+    const isAuth = useSelector(isAuthenticated);
+
+
+    useEffect(() => {
+        console.log("onLayer state changed:", onLayer);
+        console.log("Users data:", users);
+        console.log("Is Authenticated:", isAuth);
+
+
+
+
+
+    }, [onLayer]);
 
     const hanndleAddProject = () => {
         console.log("Add Project Clicked");

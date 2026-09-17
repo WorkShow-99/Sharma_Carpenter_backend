@@ -1,0 +1,442 @@
+.project-overlay-content {
+
+    width: 100%;
+
+    height: 90vh;
+
+    background: #fff;
+
+    border-top-left-radius: 20px;
+
+    border-top-right-radius: 20px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.project-overlay-header {
+
+    height: 78px;
+
+    min-height: 78px;
+
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 32px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+}
+
+
+/* ==========================================
+   LEFT SIDE
+========================================== */
+
+.project-header-left {
+
+    display: flex;
+
+    align-items: center;
+
+    min-width: 0;
+
+}
+
+
+.project-header-owner {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.project-header-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+}
+
+
+.project-header-placeholder {
+
+    background: #111;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+
+}
+
+
+.project-header-owner-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-left: 12px;
+
+    white-space: nowrap;
+
+}
+
+
+.project-header-owner-name {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #222;
+
+}
+
+
+.project-header-by {
+
+    font-size: 14px;
+
+    color: #777;
+
+}
+
+
+.project-header-profession {
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #222;
+
+    border-bottom: 2px solid #aaa;
+
+    padding-bottom: 2px;
+
+}
+
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.project-header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.project-header-action {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    background: transparent;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: #222;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+
+}
+
+
+.project-header-action:hover {
+
+    background: #f2f2f2;
+
+}
+
+
+.project-header-action:active {
+
+    transform: scale(.94);
+
+}
+
+
+/* ==========================================
+   CLOSE
+========================================== */
+
+.project-header-close {
+
+    width: 44px;
+
+    height: 44px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #222;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    margin-left: 8px;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+
+}
+
+
+.project-header-close:hover {
+
+    background: #000;
+
+}
+
+
+.project-header-close:active {
+
+    transform: scale(.94);
+
+}
+
+
+/* ==========================================
+   BODY
+========================================== */
+
+.project-overlay-body {
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    width: 100%;
+
+}
+
+
+/* ==========================================
+   LOADING / ERROR
+========================================== */
+
+.project-state {
+
+    min-height: 400px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #555;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .project-overlay-content {
+
+        height: 95vh;
+
+        border-top-left-radius: 16px;
+
+        border-top-right-radius: 16px;
+
+    }
+
+
+    .project-overlay-header {
+
+        height: 64px;
+
+        min-height: 64px;
+
+        padding: 0 14px;
+
+    }
+
+
+    .project-header-avatar {
+
+        width: 32px;
+
+        height: 32px;
+
+    }
+
+
+    .project-header-owner-info {
+
+        gap: 6px;
+
+        margin-left: 8px;
+
+    }
+
+
+    .project-header-owner-name {
+
+        font-size: 13px;
+
+    }
+
+
+    .project-header-by {
+
+        font-size: 12px;
+
+    }
+
+
+    .project-header-profession {
+
+        font-size: 13px;
+
+    }
+
+
+    .project-header-actions {
+
+        gap: 2px;
+
+    }
+
+
+    .project-header-action {
+
+        width: 36px;
+
+        height: 36px;
+
+    }
+
+
+    .project-header-close {
+
+        width: 38px;
+
+        height: 38px;
+
+        margin-left: 2px;
+
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .project-header-by {
+
+        display: none;
+
+    }
+
+
+    .project-header-profession {
+
+        display: none;
+
+    }
+
+
+    .project-header-owner-info {
+
+        max-width: 130px;
+
+        overflow: hidden;
+
+    }
+
+
+    .project-header-owner-name {
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+
+    }
+
+
+    .project-header-action:nth-child(3) {
+
+        display: none;
+
+    }
+
+}

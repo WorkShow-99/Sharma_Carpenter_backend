@@ -1,0 +1,35 @@
+.idea-search{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:16px 20px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+    z-index: 99999;
+
+}
+
+.idea-search input{
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    width:100%;
+
+    font-size:16px;
+    z-index: 999999;
+
+}

@@ -1,5 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+
+
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import image1 from "../../../public/16.png";
@@ -30,12 +32,13 @@ export const Second_div = () => {
         yPercent: 10,
         opacity: 0,
         duration: 0.6,
+       
         ease: "power2.out",
         stagger: 0.08,
         scrollTrigger: {
           trigger: ".c",
-          start: "top 20%",
-          end: "+=1600",
+          start: "bottom bottom",
+          end: "+=4500",
          scrub: 2,     // 🔥 makes it scroll-controlled
           // markers: true
       

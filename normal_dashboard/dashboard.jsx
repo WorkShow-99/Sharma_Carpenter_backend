@@ -1,74 +1,114 @@
-// import { useAuth }
-//    from "../context/auth_context";
-
-import {isAuthenticated , user as userData,loading as load} from "../src/redux_store/User_redux/Uesr_get";
-import { useSelector } from "react-redux";
-import { logOut } from "../src/redux_store/User_redux/User_function";
-
-
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export  const Dashboard = () => {
-   const dispatch = useDispatch();
-   const navigate = useNavigate();
+import {
+    user as userData,
+    loading as load,
+} from "../src/redux_store/User_redux/Uesr_get";
 
-   const user = useSelector(userData);
-   const isAuth = useSelector(isAuthenticated);
-   const loading = useSelector(load);
+import { logOut } from "../src/redux_store/User_redux/User_function";
+import {logoutUser} from "../src/services/authService"; // We'll create this next
+// import { logoutUser } from "../src/services/authService"; // We'll create this next
 
-   const  logout = () => {
-      
-      try {
-         cosole.log("Logging out user:", user);
-         dispatch(logOut());
+export const Dashboard = () => {
 
-         localStorage.removeItem("user");
-         localStorage.removeItem("accessToken");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-         // Optionally, you can also clear all local storage
-         // localStorage.clear();
-         
-         // Redirect to login page
-         navigate("/login");
+    const user = useSelector(userData);
+    const loading = useSelector(load);
+
+    const handleLogout = async () => {
+         try {
+            // Call backend logout API
+            const result = await logoutUser();
+
+            // Clear local storage
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+
+            // Dispatch logout action to Redux store
+            dispatch(logOut());
+
+            // Navigate to login page
+            navigate("/login", { replace: true });
+
+         } catch (error) {
+            console.error("Logout Failed:", error);
+         }
+
+    }
 
 
-      } catch (error) {
-         console.log(error);
-      }
-   };
+   //  const logout = async () => {
 
-   
+   //      try {
 
-   // const {
-   //    user,
-   //    logout
-   // } = useAuth();
+   //          // Call backend logout API later
+   //          // await logoutUser();
 
-   return (
+   //          localStorage.removeItem("accessToken");
+   //          // Remove refreshToken cookie (set with same attributes to ensure removal)
+   //          try {
+   //              document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname}; Secure; SameSite=None`;
+   //          } catch (e) {
+   //              // Fallback: basic removal
+   //              document.cookie = "refreshToken=; Max-Age=0; path=/;";
+   //          }
+            
 
-      <div>
+   //          dispatch(logOut());
+            
 
-         <img
-            src={user.photoURL}
-            width="100"
-         />
+   //          navigate("/login", {
+   //              replace: true,
+   //          });
 
-         <h1>
-            {user.displayName}
-         </h1>
+   //      } catch (error) {
 
-         <p>
-            {user.email}
-         </p>
+   //          console.error("Logout Failed:", error);
 
-         <button onClick={logout}>
-            Logout
-         </button>
+   //      }
 
-      </div>
+   //  };
 
-   );
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black"></div>
+            </div>
+        );
+    }
+
+    return (
+
+        <div className="min-h-screen flex flex-col items-center justify-center gap-6">
+
+            {user?.profileImage && (
+                <img
+                    src={user.profileImage}
+                    alt={user.username}
+                    className="w-24 h-24 rounded-full"
+                />
+            )}
+
+            <h1 className="text-3xl font-bold">
+                {user?.username}
+            </h1>
+
+            <p className="text-gray-600">
+                {user?.email}
+            </p>
+
+            <button
+                onClick={handleLogout}
+                className="px-6 py-3 bg-black text-white rounded-lg hover:opacity-90">
+                Logout
+            </button>
+
+        </div>
+
+    );
 
 };
 

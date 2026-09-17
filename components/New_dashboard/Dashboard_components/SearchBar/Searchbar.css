@@ -1,0 +1,51 @@
+.search-container{
+
+    height:40px;
+
+    background:#efefeb;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:0 25px;
+    z-index: 9999999;
+
+}
+
+.user-profile-wrapper {
+    position: relative;
+}
+
+.user-profile-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+
+.search-container input{
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:18px;
+}
+
+
+.search-icon{
+
+    width:20px;
+
+    height:30px;
+
+    color:#555;
+}

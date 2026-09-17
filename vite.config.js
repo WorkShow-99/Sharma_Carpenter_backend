@@ -14,7 +14,7 @@ server: {
       "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
 
     },
-    port: 5177,      // Set your favorite port here
+    port: 5178,      // Set your favorite port here
     strictPort: true
   },
 

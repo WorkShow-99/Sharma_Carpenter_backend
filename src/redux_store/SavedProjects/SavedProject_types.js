@@ -1,0 +1,58 @@
+// Fetch unorganized saved projects
+export const FETCH_UNORGANIZED_REQUEST =
+    "FETCH_UNORGANIZED_REQUEST";
+
+export const FETCH_UNORGANIZED_SUCCESS =
+    "FETCH_UNORGANIZED_SUCCESS";
+
+export const FETCH_UNORGANIZED_FAILURE =
+    "FETCH_UNORGANIZED_FAILURE";
+
+
+// Fetch projects inside a directory
+export const FETCH_DIRECTORY_PROJECTS_REQUEST =
+    "FETCH_DIRECTORY_PROJECTS_REQUEST";
+
+export const FETCH_DIRECTORY_PROJECTS_SUCCESS =
+    "FETCH_DIRECTORY_PROJECTS_SUCCESS";
+
+export const FETCH_DIRECTORY_PROJECTS_FAILURE =
+    "FETCH_DIRECTORY_PROJECTS_FAILURE";
+
+
+// Save a project
+export const SAVE_PROJECT_REQUEST =
+    "SAVE_PROJECT_REQUEST";
+
+export const SAVE_PROJECT_SUCCESS =
+    "SAVE_PROJECT_SUCCESS";
+
+export const SAVE_PROJECT_FAILURE =
+    "SAVE_PROJECT_FAILURE";
+
+
+// Remove saved project
+export const UNSAVE_PROJECT_REQUEST =
+    "UNSAVE_PROJECT_REQUEST";
+
+export const UNSAVE_PROJECT_SUCCESS =
+    "UNSAVE_PROJECT_SUCCESS";
+
+export const UNSAVE_PROJECT_FAILURE =
+    "UNSAVE_PROJECT_FAILURE";
+
+
+// Move project to directory
+export const MOVE_PROJECT_REQUEST =
+    "MOVE_PROJECT_REQUEST";
+
+export const MOVE_PROJECT_SUCCESS =
+    "MOVE_PROJECT_SUCCESS";
+
+export const MOVE_PROJECT_FAILURE =
+    "MOVE_PROJECT_FAILURE";
+
+
+// Clear saved projects
+export const CLEAR_SAVED_PROJECTS =
+    "CLEAR_SAVED_PROJECTS";

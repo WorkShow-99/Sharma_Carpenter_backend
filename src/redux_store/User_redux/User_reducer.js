@@ -6,11 +6,13 @@ import {
   LOGIN_FAILURE, 
   LOGOUT, 
   UPDATE_PROFILE ,
-    CHANGE_USER,
-    EMAIL_LOGIN_SUCCESS,
-    GOOGLE_LOGIN_SUCCESS,
+  CHANGE_USER,
+  EMAIL_LOGIN_SUCCESS,
+  GOOGLE_LOGIN_SUCCESS,
+LOADING_REQUEST
 
 } from './UserType';
+
 
 
 
@@ -20,10 +22,13 @@ import {
 const initialState = {
   loading: false,
   isAuthenticated: false,
-  user: null,    // Will hold { id, name, email }
+  user: {},    // Will hold { id, name, email }
   isGoogleAuthenticated: false, // New field to track Google auth status
   isEmailAuthenticated: false, // New field to track email auth status
-  error: null
+  error: null,
+  authChecked: false ,// New field to track if auth check has been performed
+
+  
 
 };
 
@@ -34,13 +39,21 @@ export function userReducer(state = initialState, action) {
         ...initialState, // Reset to initial state on new login attempt
         loading: true,
         error: null // Reset errors on a new attempt
+        , authChecked: false // Mark auth check as not completed on new login attempt
       };
+      // --- loading request case added for better state management during async operations
+    case LOADING_REQUEST:
+        return {
+          ...initialState, // Reset to initial state on new login attempt
+          loading: true,
+          error: null // Reset errors on a new attempt
+          , authChecked: false // Mark auth check as not completed on new login attempt
+        };
       
+
+      // ________----------login success cases for different auth methods----------________
     case LOGIN_SUCCESS:
-      // console.log("Login successful, updating state with user data:", action.payload);
-      // console.log("User data being set in state:", action.payload.user);
-      // console.log("............");
-      // console.log("Is Google Authenticated:", state);
+      console.log("action payload:", action.payload);
       return {
         ...initialState, // Reset to initial state on successful login
         loading: false,
@@ -48,30 +61,11 @@ export function userReducer(state = initialState, action) {
         user: action.payload.user,
         isGoogleAuthenticated: false,
         error: null
+        , authChecked: true // Mark auth check as completed on successful login
       };
 
-    case GOOGLE_LOGIN_SUCCESS:
-        return {
-            ...initialState,
-            loading: false,
-            isAuthenticated: true,
-            user: action.payload.user,
-            isGoogleAuthenticated: true, // Set Google auth status to true
-            isEmailAuthenticated: false, // Set email auth status to false for Google login
-            error: null
-        };
-
-    case EMAIL_LOGIN_SUCCESS:
-        return {
-            ...state,
-            loading: false,
-            isAuthenticated: true,
-            user: action.payload.user,
-            isGoogleAuthenticated: false, // Set Google auth status to false for email login
-            isEmailAuthenticated: true, // Set email auth status to true for email login
-            error: null
-        };
     
+   
       
     case LOGIN_FAILURE:
       return {
@@ -82,17 +76,21 @@ export function userReducer(state = initialState, action) {
         isEmailAuthenticated: false, // Ensure email auth status is reset on failure
         user: null,
         error: action.payload // Error message string
+        , authChecked: true // Mark auth check as completed on failure
       };
       
     case LOGOUT:
       console.log("Logging out, resetting user state.");
+
 
       return {
         ...initialState, // Safely resets back to the blank configuration
         isGoogleAuthenticated: false, // Ensure Google auth status is reset on logout
         isEmailAuthenticated: false ,// Ensure email auth status is reset on logout
         isAuthenticated: false, // Ensure overall auth status is reset on logout
-        user: null // Explicitly clear user data on logout
+
+        user: {} // Explicitly clear user data on logout
+        , authChecked: true // Mark auth check as completed on logout
     };
       
     case UPDATE_PROFILE:

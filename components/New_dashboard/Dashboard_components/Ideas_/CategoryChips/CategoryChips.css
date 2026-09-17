@@ -1,0 +1,37 @@
+.category-chip-container{
+
+    display:flex;
+
+    gap:14px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:40px;
+
+}
+
+.category-chip{
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    background:white;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+.category-chip:hover{
+
+    background:#111;
+
+    color:white;
+
+}

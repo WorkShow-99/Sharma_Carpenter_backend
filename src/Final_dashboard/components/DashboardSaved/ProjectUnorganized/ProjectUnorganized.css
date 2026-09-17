@@ -1,0 +1,443 @@
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   UNORGANIZED PROJECTS
+========================================= */
+
+.unorganized-projects {
+    width: 100%;
+    min-width: 0;
+    margin-top: 40px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.unorganized-header {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.unorganized-header h2,
+.unorganized-header h3 {
+    margin: 0;
+
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.unorganized-header p {
+    margin: 5px 0 0;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+.project-count {
+    flex-shrink: 0;
+
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* =========================================
+   PROJECT GRID
+========================================= */
+/* 
+.unorganized-projects-grid,
+.project-grid {
+    width: 100%;
+    min-width: 0;
+
+    display: grid; */
+
+    /*
+        The card will automatically resize.
+
+        Minimum card width = 220px
+        Available space determines number of cards.
+    */
+
+    /* grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+
+    align-items: start;
+} */
+
+
+
+
+/* =========================================
+   PROJECT GRID
+========================================= */
+
+.unorganized-projects-grid,
+.project-grid {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    /*
+        Desktop:
+        Keep cards at a controlled size instead
+        of allowing them to become huge.
+    */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.unorganized-projects-grid > *,
+.project-grid > * {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1400px) {
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        grid-template-columns:
+            repeat(5, minmax(0, 1fr));
+
+        gap: 20px;
+    }
+
+}
+
+
+/* =========================================
+   NORMAL DESKTOP / LAPTOP
+========================================= */
+
+@media (min-width: 1000px) and (max-width: 1399px) {
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 16px;
+    }
+
+}
+
+
+/* =========================================
+   TABLET / SMALL LAPTOP
+========================================= */
+
+@media (min-width: 701px) and (max-width: 999px) {
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        /*
+            Always 2 cards on mobile.
+        */
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        /*
+            Still 2 cards.
+            Width automatically adapts.
+        */
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+}
+
+
+/* =========================================
+   PROJECT CARD
+========================================= */
+
+.unorganized-projects-grid > *,
+.project-grid > * {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-unorganized,
+.projects-empty {
+    width: 100%;
+    min-height: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: #777;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.projects-loading,
+.projects-loading-more {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: #777;
+}
+
+
+/* =========================================
+   END OF PROJECTS
+========================================= */
+
+.projects-end {
+    width: 100%;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .unorganized-projects {
+        margin-top: 32px;
+    }
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        /*
+            Three cards when possible.
+        */
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL TABLET / MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        /*
+            ALWAYS TWO CARDS.
+        */
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+    .unorganized-header {
+        margin-bottom: 15px;
+    }
+
+    .unorganized-header h2,
+    .unorganized-header h3 {
+        font-size: 20px;
+    }
+
+    .unorganized-header p {
+        font-size: 13px;
+    }
+
+    .project-count {
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .unorganized-projects {
+        margin-top: 28px;
+    }
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        /*
+            NEVER DROP BELOW TWO COLUMNS.
+        */
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .unorganized-header {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .unorganized-header h2,
+    .unorganized-header h3 {
+        font-size: 18px;
+    }
+
+    .unorganized-header p {
+        font-size: 12px;
+    }
+
+    .project-count {
+        font-size: 12px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+
+    .unorganized-projects {
+        margin-top: 24px;
+    }
+
+    .unorganized-projects-grid,
+    .project-grid {
+
+        /*
+            STILL TWO CARDS.
+
+            The cards simply become narrower
+            according to the available width.
+        */
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+    .unorganized-header h2,
+    .unorganized-header h3 {
+        font-size: 16px;
+    }
+
+    .unorganized-header p {
+        font-size: 11px;
+    }
+
+    .project-count {
+        font-size: 11px;
+    }
+
+}

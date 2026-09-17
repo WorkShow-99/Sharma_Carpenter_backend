@@ -1,0 +1,103 @@
+.liked-projects{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+
+}
+
+/* ===================== */
+
+.liked-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.liked-header h2{
+
+    font-size:clamp(1.6rem,2vw,2rem);
+
+    font-weight:700;
+
+}
+
+/* ===================== */
+
+.liked-empty{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:clamp(24px,4vw,50px);
+
+}
+
+.liked-empty svg{
+
+    color:#ef4444;
+
+    margin-bottom:18px;
+
+}
+
+.liked-empty h2{
+
+    font-size:clamp(1.6rem,3vw,2.5rem);
+
+    margin-bottom:10px;
+
+}
+
+.liked-empty p{
+
+    max-width:520px;
+
+    color:#666;
+
+    line-height:1.7;
+
+    margin-bottom:28px;
+
+}
+
+.liked-empty button{
+
+    padding:14px 24px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#111;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.liked-empty button:hover{
+
+    transform:translateY(-2px);
+
+}

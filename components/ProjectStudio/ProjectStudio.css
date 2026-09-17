@@ -1,0 +1,35 @@
+.project-studio {
+    width: 100%;
+    min-height: 100bvh;
+    background: #f8f9fb;
+
+    display: flex;
+    flex-direction: column;
+    z-index: -99;
+}
+
+/* Keeps the editor below the sticky header */
+.project-studio > :last-child {
+    flex: 1;
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+    .project-studio {
+        padding: 0;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .project-studio {
+        width: 100%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .project-studio {
+        min-height: 100dvh;
+    }
+}

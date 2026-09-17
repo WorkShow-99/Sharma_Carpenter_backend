@@ -1,0 +1,253 @@
+.liked-projects-container {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    width: 100%;
+
+    align-items: flex-start;
+}
+
+/* =========================================
+   CARD HOVER
+========================================= */
+
+.liked-project-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .liked-project-card .media-type-icon {
+
+        top: 6px;
+
+        left: 6px;
+
+        width: 28px;
+
+        height: 28px;
+
+    }
+
+
+    .liked-project-card .remove-liked-btn {
+
+        top: 6px;
+
+        right: 6px;
+
+        width: 32px;
+
+        height: 32px;
+
+    }
+
+}
+
+
+.liked-project-grid {
+
+    width: 100%;
+
+}
+
+
+.liked-projects-container {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+}
+
+@media (max-width: 900px) {
+
+    .liked-projects-container {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .liked-projects-container {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   LIKED PROJECT GRID
+========================================= */
+
+.liked-projects-container {
+    width: 100%;
+
+    display: grid;
+
+    /* Desktop: 4 cards per row */
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.liked-project-card {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 0.82 / 1;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #eee;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.liked-project-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.20);
+
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.liked-project-card .project-image {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .liked-projects-container {
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 10px;
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .liked-projects-container {
+
+        /* 4 projects in one row */
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 7px;
+
+    }
+
+
+    .liked-project-card {
+
+        border-radius: 7px;
+
+        /* Makes cards shorter */
+        aspect-ratio: 0.90 / 1;
+
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .liked-projects-container {
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 5px;
+
+    }
+
+
+    .liked-project-card {
+
+        border-radius: 6px;
+
+    }
+
+}

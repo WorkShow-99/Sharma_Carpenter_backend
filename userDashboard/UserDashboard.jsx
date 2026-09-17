@@ -20,6 +20,7 @@ export const UserDashboard = () => {
 
 const isAuth = useSelector(isAuthenticated);
 
+
   const [activeTab, setActiveTab] =
     useState("dashboard");
 
@@ -30,9 +31,7 @@ const isAuth = useSelector(isAuthenticated);
 
   }, []);
 
-  if (!isAuth) {
-    return <Navigate to="/login" replace />;
-  }
+  
 
   const renderContent = () => {
 

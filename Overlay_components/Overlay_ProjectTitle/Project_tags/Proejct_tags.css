@@ -1,0 +1,200 @@
+/* =========================================
+   PROJECT TAGS
+========================================= */
+
+.project-tags {
+
+    width: min(1100px, 92%);
+
+    margin: 10px auto 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 22px;
+}
+
+
+/* =========================================
+   SUBTITLE
+========================================= */
+
+.project-tags-header {
+
+    width: 100%;
+
+    text-align: center;
+}
+
+
+.project-tags-header p {
+
+    margin: 0 auto;
+
+    max-width: 600px;
+
+    font-size: clamp(
+        0.72rem,
+        1vw,
+        0.88rem
+    );
+
+    line-height: 1.5;
+
+    font-weight: 400;
+
+    letter-spacing: 0.02em;
+
+    color: #999;
+}
+
+
+/* =========================================
+   TAGS
+========================================= */
+
+.tags-wrapper {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   TAG PILL
+========================================= */
+
+.tag-pill {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        15px
+        25px;
+
+    border: 1px solid #e2e2e2;
+
+    border-radius: 999px;
+
+    background: #fafafa;
+
+    color: #333;
+
+    font-size: clamp(
+        1.2rem,
+        0.5vw,
+        1.0rem
+    );
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    cursor: default;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.tag-pill:hover {
+
+    background: #111;
+
+    color: #fff;
+
+    border-color: #111;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .project-tags {
+
+        width: 90%;
+
+        margin-top: 5px;
+
+        gap: 16px;
+    }
+
+
+    .project-tags-header p {
+
+        max-width: 340px;
+
+        font-size: 0.72rem;
+
+        line-height: 1.45;
+    }
+
+
+    .tags-wrapper {
+
+        gap: 8px;
+    }
+
+
+    .tag-pill {
+
+        padding: 6px 12px;
+
+        font-size: 0.72rem;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL SCREENS
+========================================= */
+
+@media (max-width: 380px) {
+
+    .project-tags-header p {
+
+        font-size: 0.68rem;
+
+    }
+
+
+    .tag-pill {
+
+        padding: 6px 10px;
+
+        font-size: 0.68rem;
+
+    }
+
+}

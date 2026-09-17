@@ -9,3 +9,4 @@ export const GOOGLE_LOGIN_SUCCESS = 'GOOGLE_LOGIN_SUCCESS'; // New action type f
 export const EMAIL_LOGIN_SUCCESS = 'EMAIL_LOGIN_SUCCESS'; // New action type for email login success
 export const GOOGLE_LOGIN_FAILURE = 'GOOGLE_LOGIN_FAILURE'; // New action type for Google login failure
 export const EMAIL_LOGIN_FAILURE = 'EMAIL_LOGIN_FAILURE'; // New action type for email login failure
+export const LOADING_REQUEST = 'LOADING_REQUEST'; // New action type for loading request

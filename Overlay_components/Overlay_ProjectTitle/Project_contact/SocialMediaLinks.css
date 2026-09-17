@@ -1,0 +1,67 @@
+.social-section{
+
+    margin-top:60px;
+}
+
+.social-section h3{
+
+    font-size:1.6rem;
+
+    margin-bottom:25px;
+
+    color:#222;
+
+}
+
+.social-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(auto-fit,minmax(180px,1fr));
+
+    gap:18px;
+
+}
+
+.social-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:18px 22px;
+
+    background:white;
+
+    border:1px solid #e6e6e6;
+
+    border-radius:18px;
+
+    text-decoration:none;
+
+    color:#222;
+
+    transition:.25s;
+}
+
+.social-card:hover{
+
+    background:#111;
+
+    color:white;
+
+    transform:translateY(-4px);
+
+    border-color:#111;
+}
+
+.social-card span{
+
+    font-size:clamp(.95rem,1vw,1.1rem);
+
+    font-weight:500;
+}

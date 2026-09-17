@@ -1,0 +1,303 @@
+/* .overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(243, 40, 40, 0.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+}
+
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(128, 84, 84, 0.607);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-end;
+
+    animation:fadeIn .3s ease;
+
+    z-index:999999;
+}
+
+.overlay-panel{
+
+    width:100%;
+
+    height:90vh;
+
+    background:white;
+
+    border-radius:20px 20px 0 0;
+
+    animation:slideUp .35s ease forwards;
+}
+.overlay-panel.closing{
+
+    animation:slideDown .3s ease forwards;
+}
+
+@keyframes slideUp{
+
+    from{
+
+        transform:translateY(100%);
+    }
+
+    to{
+
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes slideDown{
+
+    from{
+
+        transform:translateY(0);
+    }
+
+    to{
+
+        transform:translateY(100%);
+    }
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+    }
+
+    to{
+
+        opacity:1;
+    }
+
+} */
+
+
+/* .overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-end;
+
+    z-index:9999;
+}
+
+.overlay-content{
+
+    width:95vw;
+
+    height:94vh;
+
+    background:white;
+
+    border-radius:20px 20px 0 0;
+
+    overflow:auto;
+} */
+
+/* Background */
+
+/* .overlayyy {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    backdrop-filter: blur(6px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    z-index: 9999;
+
+    animation: overlayFade .25s ease;
+
+    overflow: hidden;
+    overflow-x:hidden;
+     /* overflow-y:auto; */
+/* } */ */
+.overlayyy{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    backdrop-filter:blur(6px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-end;
+
+    overflow:hidden;
+
+    z-index:9999;
+
+}
+
+
+/* Project Panel */
+
+.overlay-content {
+
+    width: min(96vw, 1600px);
+
+    height: 92vh;
+
+    background: #fff;
+
+    border-radius: 24px 24px 0 0;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    animation: slideUp .35s ease;
+
+    box-shadow:
+        0 -10px 40px rgba(0,0,0,.15);
+
+}
+
+
+/* Nice Scrollbar */
+
+.overlay-content::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.overlay-content::-webkit-scrollbar-thumb{
+
+    background:#d5d5d5;
+
+    border-radius:20px;
+
+}
+
+.overlay-content::-webkit-scrollbar-thumb:hover{
+
+    background:#bfbfbf;
+
+}
+
+
+/* Animation */
+
+@keyframes slideUp{
+
+    from{
+
+        transform:translateY(100%);
+
+    }
+
+    to{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes overlayFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+.project-overlay-content{
+
+    width:96%;
+
+    max-width:1700px;
+
+    height:calc(100vh - 24px);
+
+    background:white;
+
+    border-radius:24px 24px 0 0;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    position:relative;
+
+}
+.project-overlay-content::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+.project-overlay-content::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+.project-overlay-content::-webkit-scrollbar-thumb{
+
+    background:#d0d0d0;
+
+    border-radius:20px;
+
+    border:3px solid white;
+}
+
+.project-overlay-content::-webkit-scrollbar-thumb:hover{
+
+    background:#a8a8a8;
+
+}

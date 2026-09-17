@@ -1,0 +1,460 @@
+/* =========================================================
+   DASHBOARD NAVIGATION
+   ========================================================= */
+
+.dashboard-navigation {
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 30px 0;
+
+    background: #fff;
+
+    border: 1px solid #e8e8e8;
+    border-radius: 22px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   NAVIGATION SCROLL CONTAINER
+   ========================================================= */
+
+.dashboard-navigation-scroll {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(6px, 1.5vw, 20px);
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+
+    flex-wrap: nowrap;
+
+}
+
+
+/* Hide scrollbar */
+
+.dashboard-navigation-scroll::-webkit-scrollbar {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   NAVIGATION LINK
+   ========================================================= */
+
+.dashboard-navigation-link {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(5px, 0.8vw, 10px);
+
+    /*
+        Desktop:
+        links can grow naturally
+
+        Mobile:
+        they become equal width
+    */
+
+    flex: 0 1 auto;
+
+    min-width: 0;
+
+    max-width: 180px;
+
+    padding:
+        clamp(9px, 1vw, 14px)
+        clamp(12px, 1.5vw, 24px);
+
+    border-radius: clamp(10px, 1vw, 14px);
+
+    text-decoration: none;
+
+    color: #666;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.2s ease;
+
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.dashboard-navigation-icon {
+
+    width: clamp(18px, 2vw, 28px);
+
+    height: clamp(18px, 2vw, 28px);
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.dashboard-navigation-link span {
+
+    font-size: clamp(0.78rem, 1vw, 0.95rem);
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.dashboard-navigation-link:hover {
+
+    background: #f6f6f6;
+
+    color: #111;
+
+}
+
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.dashboard-navigation-link.active {
+
+    background: #111;
+
+    color: #fff;
+
+}
+
+
+.dashboard-navigation-link.active .dashboard-navigation-icon {
+
+    color: #fff;
+
+}
+
+
+/* =========================================================
+   DESKTOP
+   1025px+
+   ========================================================= */
+
+@media (min-width: 1025px) {
+
+    .dashboard-navigation-scroll {
+
+        justify-content: center;
+
+        overflow-x: visible;
+
+    }
+
+
+    .dashboard-navigation-link {
+
+        flex: 0 1 auto;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   769px - 1024px
+   ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .dashboard-navigation {
+
+        border-radius: 18px;
+
+    }
+
+
+    .dashboard-navigation-scroll {
+
+        justify-content: center;
+
+        gap: 10px;
+
+        padding: 10px;
+
+    }
+
+
+    .dashboard-navigation-link {
+
+        padding: 10px 15px;
+
+    }
+
+
+    .dashboard-navigation-link span {
+
+        font-size: 0.85rem;
+
+    }
+
+
+    .dashboard-navigation-icon {
+
+        width: 23px;
+
+        height: 23px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   <= 768px
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-navigation {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        margin: 20px 0;
+
+        border-radius: 16px;
+
+    }
+
+
+    .dashboard-navigation-scroll {
+
+        width: 100%;
+
+        padding: 5px;
+
+        gap: 3px;
+
+        justify-content: space-between;
+
+        overflow-x: hidden;
+
+    }
+
+
+    /*
+        IMPORTANT
+
+        Every item gets equal width.
+        This allows all 5 items to fit
+        even on a 340px screen.
+    */
+
+    .dashboard-navigation-link {
+
+        flex: 1 1 0;
+
+        width: auto;
+
+        min-width: 0;
+
+        max-width: none;
+
+        height: 52px;
+
+        padding: 0;
+
+        gap: 0;
+
+        border-radius: 11px;
+
+    }
+
+
+    /*
+        Hide labels on mobile
+    */
+
+    .dashboard-navigation-link span {
+
+        display: none;
+
+    }
+
+
+    /*
+        Mobile icon
+    */
+
+    .dashboard-navigation-icon {
+
+        width: clamp(20px, 6vw, 26px);
+
+        height: clamp(20px, 6vw, 26px);
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   <= 400px
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .dashboard-navigation {
+
+        margin: 15px 0;
+
+        border-radius: 14px;
+
+    }
+
+
+    .dashboard-navigation-scroll {
+
+        padding: 4px;
+
+        gap: 2px;
+
+    }
+
+
+    .dashboard-navigation-link {
+
+        height: 50px;
+
+        border-radius: 10px;
+
+    }
+
+
+    .dashboard-navigation-icon {
+
+        width: 21px;
+
+        height: 21px;
+
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL
+   <= 340px
+   ========================================================= */
+
+@media (max-width: 340px) {
+
+    .dashboard-navigation {
+
+        margin: 12px 0;
+
+        border-radius: 12px;
+
+    }
+
+
+    .dashboard-navigation-scroll {
+
+        padding: 3px;
+
+        gap: 1px;
+
+    }
+
+
+    .dashboard-navigation-link {
+
+        height: 46px;
+
+        border-radius: 9px;
+
+    }
+
+
+    .dashboard-navigation-icon {
+
+        width: 19px;
+
+        height: 19px;
+
+    }
+
+}
+
+
+/* =========================================================
+   PREVENT FLEX CHILD FROM FORCING PAGE WIDTH
+   ========================================================= */
+
+.app-layout,
+.main-content {
+
+    min-width: 0;
+
+}
+
+
+/* =========================================================
+   SAFETY
+   ========================================================= */
+
+.dashboard-navigation *,
+.dashboard-navigation *::before,
+.dashboard-navigation *::after {
+
+    box-sizing: border-box;
+
+}

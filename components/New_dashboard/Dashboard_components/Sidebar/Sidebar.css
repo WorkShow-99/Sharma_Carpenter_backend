@@ -1,0 +1,696 @@
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    width: 80px;
+    height: 100vh;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    background: #ffffff;
+
+    border-right: 1px solid #eeeeee;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 0;
+
+    box-sizing: border-box;
+
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   SIDEBAR TOP
+   ========================================================= */
+
+.sidebar-top {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 28px;
+
+    align-items: center;
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.sidebar-bottom {
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    width: 42px;
+    height: 42px;
+
+    background: linear-gradient(
+        135deg,
+        #e60023 0%,
+        #c4001c 100%
+    );
+
+    color: #1c1b1b;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.16),
+        inset 0 2px 6px rgba(255, 255, 255, 0.15);
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LOGO MORPH
+   ========================================================= */
+
+@keyframes blob-morph {
+
+    0% {
+        border-radius: 48% 52% 45% 55% / 55% 45% 55% 45%;
+    }
+
+    33% {
+        border-radius: 55% 45% 52% 48% / 45% 55% 45% 55%;
+    }
+
+    66% {
+        border-radius: 45% 55% 48% 52% / 52% 48% 55% 45%;
+    }
+
+    100% {
+        border-radius: 48% 52% 45% 55% / 55% 45% 55% 45%;
+    }
+
+}
+
+
+.logo.animate {
+    animation: blob-morph 6s ease-in-out infinite;
+}
+
+
+.logo:hover {
+    transform: scale(1.04) rotate(-2deg);
+
+    filter: brightness(1.03);
+}
+
+
+/* =========================================================
+   ICON BUTTON
+   ========================================================= */
+
+.icon-btn {
+
+    width: 50px;
+    height: 50px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #222222;
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.icon-btn svg {
+
+    width: 25px;
+    height: 25px;
+
+    flex-shrink: 0;
+
+}
+
+
+.icon-btn:hover {
+
+    background: #f1f1f1;
+
+}
+
+
+/* =========================================================
+   ACTIVE ICON
+   ========================================================= */
+
+.icon-btn.active {
+
+    background: #000000;
+
+    color: #ffffff;
+
+}
+
+
+.icon-btn.active svg {
+
+    color: #ffffff;
+
+}
+
+
+/* =========================================================
+   DESKTOP SIDEBAR
+   ========================================================= */
+
+.desktop-sidebar {
+
+    display: flex;
+
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+   ========================================================= */
+
+.mobile-floating-nav {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   TABLET
+   641px - 1024px
+   ========================================================= */
+
+@media (min-width: 641px) and (max-width: 1024px) {
+
+    /* Hide desktop sidebar */
+
+    .desktop-sidebar {
+
+        display: none;
+
+    }
+
+
+    /* Floating navigation */
+
+    .mobile-floating-nav {
+
+        position: fixed;
+
+        left: 50%;
+        bottom: 18px;
+
+        transform: translateX(-50%);
+
+        width: min(88vw, 560px);
+
+        height: 76px;
+
+        background: #ffffff;
+
+        border-radius: 999px;
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.16);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-around;
+
+        padding: 0 14px;
+
+        box-sizing: border-box;
+
+        z-index: 2000;
+
+    }
+
+
+    /* Navigation buttons */
+
+    .mobile-floating-nav .icon-btn {
+
+        width: 64px;
+        height: 64px;
+
+        border-radius: 22px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 4px;
+
+        color: #66645e;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn svg {
+
+        width: 27px;
+        height: 27px;
+
+    }
+
+
+    /* Keep labels on tablet */
+
+    .mobile-floating-nav .icon-btn span {
+
+        display: block;
+
+        font-size: 12px;
+
+        line-height: 1;
+
+        white-space: nowrap;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn.active {
+
+        color: #000000;
+
+        background: #f2f2f2;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn.active svg {
+
+        color: #000000;
+
+    }
+
+
+    /* Main content space */
+
+    .main-content {
+
+        padding-bottom: 110px;
+
+        min-width: 0;
+
+    }
+
+}
+
+
+/* =========================================================
+   PHONE
+   <= 640px
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    /* Hide desktop sidebar */
+
+    .desktop-sidebar {
+
+        display: none;
+
+    }
+
+
+    /* Bottom navigation */
+
+    .mobile-floating-nav {
+
+        position: fixed;
+
+        left: 0;
+        bottom: 0;
+
+        width: 100%;
+
+        height: 76px;
+
+        background: #ffffff;
+
+        border-radius: 0;
+
+        border-top: 1px solid #eeeeee;
+
+        box-shadow:
+            0 -4px 18px rgba(0, 0, 0, 0.10);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-around;
+
+        padding: 0 4px;
+
+        box-sizing: border-box;
+
+        z-index: 2000;
+
+    }
+
+
+    /*
+        Four navigation items.
+
+        Each item gets equal space.
+    */
+
+    .mobile-floating-nav .icon-btn {
+
+        width: 25%;
+
+        height: 68px;
+
+        min-width: 0;
+
+        padding: 0;
+
+        border-radius: 14px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 4px;
+
+        color: #66645e;
+
+        font-size: 12px;
+
+        font-weight: 600;
+
+        text-decoration: none;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn svg {
+
+        width: 27px;
+        height: 27px;
+
+        flex-shrink: 0;
+
+    }
+
+
+    /*
+        Show labels on normal phones
+    */
+
+    .mobile-floating-nav .icon-btn span {
+
+        display: block;
+
+        font-size: 11px;
+
+        line-height: 1;
+
+        white-space: nowrap;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn.active {
+
+        color: #000000;
+
+        background: #f5f5f5;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn.active svg {
+
+        color: #000000;
+
+    }
+
+
+    /* Main content */
+
+    .main-content {
+
+        padding-bottom: 92px;
+
+        min-width: 0;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   <= 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .mobile-floating-nav {
+
+        height: 72px;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn {
+
+        height: 64px;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn svg {
+
+        width: 25px;
+        height: 25px;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn span {
+
+        font-size: 10px;
+
+    }
+
+
+    .main-content {
+
+        padding-bottom: 88px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   <= 400px
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    /*
+        Make navigation compact enough
+        for 340px and smaller screens.
+    */
+
+    .mobile-floating-nav {
+
+        height: 68px;
+
+        padding: 0 2px;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn {
+
+        height: 60px;
+
+        border-radius: 11px;
+
+        gap: 2px;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn svg {
+
+        width: 23px;
+        height: 23px;
+
+    }
+
+
+    /*
+        Small but still readable labels.
+    */
+
+    .mobile-floating-nav .icon-btn span {
+
+        font-size: 9px;
+
+    }
+
+
+    .main-content {
+
+        padding-bottom: 84px;
+
+    }
+
+}
+
+
+/* =========================================================
+   EXTREMELY SMALL
+   <= 350px
+   ========================================================= */
+
+@media (max-width: 350px) {
+
+    /*
+        At this size the labels are removed.
+
+        This prevents the navigation from
+        looking cramped.
+
+        Icons remain visible.
+    */
+
+    .mobile-floating-nav {
+
+        height: 64px;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn {
+
+        height: 56px;
+
+        gap: 0;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn span {
+
+        display: none;
+
+    }
+
+
+    .mobile-floating-nav .icon-btn svg {
+
+        width: 23px;
+        height: 23px;
+
+    }
+
+
+    .main-content {
+
+        padding-bottom: 78px;
+
+    }
+
+}
+
+
+/* =========================================================
+   GLOBAL FLEX SAFETY
+   ========================================================= */
+
+.main-content,
+.app-layout {
+
+    min-width: 0;
+
+    max-width: 100%;
+
+}
+
+
+/* Prevent children from creating page overflow */
+
+.mobile-floating-nav *,
+.sidebar * {
+
+    box-sizing: border-box;
+
+}

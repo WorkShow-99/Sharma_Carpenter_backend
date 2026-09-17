@@ -1,0 +1,280 @@
+/* ===========================
+   Overlay Backdrop
+=========================== */
+
+.overlay-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+
+    display: flex;
+    justify-content: flex-end;
+
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(5px);
+
+    animation: overlayFadeIn 0.3s ease;
+}
+
+/* ===========================
+   Overlay Panel
+=========================== */
+
+.overlay-panel {
+    width: var(--overlay-width);
+    max-width: 100%;
+    height: 100vh;
+
+    background: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.15);
+
+    animation: overlaySlideIn 0.3s ease forwards;
+}
+
+/* ===========================
+   Mobile Handle
+=========================== */
+
+.overlay-handle {
+    display: none;
+
+    width: 52px;
+    height: 5px;
+
+    margin: 12px auto 6px;
+
+    border-radius: 999px;
+
+    background: #d1d5db;
+
+    flex-shrink: 0;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.overlay-header {
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 24px;
+
+    border-bottom: 1px solid #ececec;
+
+    flex-shrink: 0;
+}
+
+.overlay-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    color: #111827;
+}
+
+/* ===========================
+   Close Button
+=========================== */
+
+.overlay-close-button {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    outline: none;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.overlay-close-button:hover {
+    background: #f3f4f6;
+}
+
+.overlay-close-button svg {
+    color: #374151;
+}
+
+/* ===========================
+   Body
+=========================== */
+
+.overlay-body {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 24px;
+
+    scrollbar-width: thin;
+}
+
+/* Chrome Scrollbar */
+
+.overlay-body::-webkit-scrollbar {
+    width: 7px;
+}
+
+.overlay-body::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+}
+
+.overlay-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ===========================
+   Animations
+=========================== */
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes overlayFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes overlaySlideIn {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes overlaySlideOut {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Closing */
+
+.overlay-backdrop-closing {
+    animation: overlayFadeOut 0.3s forwards;
+}
+
+.overlay-panel-closing {
+    animation: overlaySlideOut 0.3s forwards;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (max-width: 1024px) {
+    .overlay-panel {
+        width: min(420px, 90vw);
+    }
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width: 768px) {
+
+    .overlay-backdrop {
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .overlay-panel {
+
+        width: 100%;
+        height: var(--overlay-mobile-height);
+
+        border-radius: 24px 24px 0 0;
+
+        animation: overlayBottomIn 0.3s ease forwards;
+    }
+
+    .overlay-panel-closing {
+        animation: overlayBottomOut 0.3s ease forwards;
+    }
+
+    .overlay-handle {
+        display: block;
+    }
+
+    .overlay-header {
+
+        height: 64px;
+
+        padding: 0 20px;
+    }
+
+    .overlay-header h2 {
+        font-size: 18px;
+    }
+
+    .overlay-body {
+        padding: 20px;
+    }
+}
+
+/* ===========================
+   Bottom Sheet Animation
+=========================== */
+
+@keyframes overlayBottomIn {
+
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes overlayBottomOut {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+
+}

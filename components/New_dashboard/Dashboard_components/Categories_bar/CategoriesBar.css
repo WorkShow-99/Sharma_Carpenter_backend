@@ -1,0 +1,70 @@
+.categories{
+
+    display:flex;
+
+    gap:35px;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+    padding:20px 10px;
+
+    transition:all .3s ease;
+
+}
+
+
+.categories::-webkit-scrollbar{
+
+    display:none;
+}
+
+
+.category{
+
+    border:none;
+
+    background:none;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    padding-bottom:10px;
+
+}
+
+
+.category.active{
+
+    border-bottom:
+
+    3px solid black;
+}
+
+
+/* hide on scroll down */
+
+.categories.hidden{
+
+    opacity:0;
+
+    transform:translateY(-50px);
+
+    height:0;
+
+    padding:0;
+
+}
+
+
+.categories.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}

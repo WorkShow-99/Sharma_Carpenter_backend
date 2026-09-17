@@ -1,0 +1,59 @@
+.similar-card{
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.similar-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.similar-image{
+
+    width:10%;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    background:#202020;
+
+    aspect-ratio:3/4;
+
+}
+
+.similar-image img{
+
+    width:10%;
+
+    height:10%;
+
+    object-fit:cover;
+
+    transition:.45s;
+
+}
+
+.similar-card:hover img{
+
+    transform:scale(1.06);
+
+}
+
+.similar-card h3{
+
+    margin-top:22px;
+
+    font-size:clamp(1.05rem,1.4vw,2rem);
+
+    font-weight:600;
+
+    color:#222;
+
+    line-height:1.3;
+
+}

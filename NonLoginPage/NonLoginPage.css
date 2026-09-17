@@ -1,0 +1,88 @@
+.main-backgroundd{
+
+    position:relative;
+
+    /* display:hidden; */
+    background:#a33c3c;
+    width:100%;
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    background:#fafafa;
+
+    background-image:
+
+        linear-gradient(
+            rgba(0, 0, 0, 0.1) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.087) 1px,
+            transparent 1px
+        );
+
+    background-size:40px 40px;
+}
+
+
+/* Mouse Spotlight */
+
+.main-backgroundd::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+        radial-gradient(
+
+            250px circle at var(--x) var(--y),
+
+            rgba(59,130,246,.08),
+
+            rgba(255,255,255,.12),
+
+
+            transparent 70%
+
+        );
+
+    transition:
+        background .08s linear;
+}
+
+
+.main-background::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+        radial-gradient(
+
+            280px circle at var(--x) var(--y),
+
+            rgba(59,130,246,.08),
+
+            rgba(255,255,255,.12),
+
+            transparent 80%
+
+        );
+
+}

@@ -13,7 +13,14 @@ import {
   EMAIL_LOGIN_SUCCESS,
   GOOGLE_LOGIN_FAILURE,
   EMAIL_LOGIN_FAILURE
+  ,LOADING_REQUEST
 } from '../User_redux/UserType';
+
+
+import {
+    getCurrentUser,
+    refreshAccessToken,
+} from "../../services/authService";
 
 import {signInWithPopup, signInWithRedirect, signOut } from "firebase/auth";
 import { auth, provider } from "../../../firestore/firestore";
@@ -28,6 +35,10 @@ import Cookies from "js-cookie";
 
 export const loginRequest = () => ({
   type: LOGIN_REQUEST
+});
+
+export const lodingRequest = () => ({
+  type: LOADING_REQUEST
 });
 
 export const loginSuccess = (userData) => ({
@@ -58,6 +69,8 @@ export const updateProfile = (updatedFields) => ({
   payload: updatedFields // Expecting: { name: 'New Name' }
 });
 
+
+import {UserLoginAPI} from "../../api/UserLogin/UserLogin.js";
 
 export const StartUserFunctionApi =  (email,password) =>  async (dispatch) => { 
 
@@ -102,12 +115,12 @@ export const StartUserFunctionApi =  (email,password) =>  async (dispatch) => {
          console.error("Login failed:", error.message);
          console.log("Login failed:", error.message);
         
-dispatch(loginFailure(error.message));
-            dispatch(logOut());
+    dispatch(loginFailure(error.message));
+                dispatch(logOut());
 
 
 
-      }
+          }
 }
 
 
@@ -135,33 +148,47 @@ export const StartUserFunctionApiWithFirebase = () => async (dispatch) => {
     const firebaseToken = await result.user.getIdToken();
     console.log("Firebase token retrieved:", firebaseToken);
 
+
+    const response = await UserLoginAPI.post("/api/google-auth/", {
+      firebaseToken, // Pass the Firebase token to your backend
+    });
+
+    console.log("Backend response after Google login:", response);
+    const data = response.data;
+
+    if (!response.status === 200) {
+      throw new Error(data.message || "Google Login Failed");
+    }
+
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("user", JSON.stringify(data.user));  
     // 2. NOW PASS IT INTO YOUR FETCH BODY
-    const response = await fetch(
-      "http://localhost:8080/api/auth/google",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // Include cookies in the request
-        body: JSON.stringify({
 
-          firebaseToken, // This will now work perfectly
-        }),
-      }
-    );
+  //   const response = await fetch(
+  //     "http://localhost:8080/api/google-auth",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       credentials: "include", // Include cookies in the request
+  //       body: JSON.stringify({
+
+  //         firebaseToken, // This will now work perfectly
+  //       }),
+  //     }
+  //   );
 
 
-   const data =
-        await response.json();
+  //  const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.status === 200) {
         throw new Error(
           data.message ||
           "Google Login Failed"
         );
       }
-
+      
       localStorage.setItem(
         "accessToken",
         data.accessToken
@@ -176,7 +203,7 @@ export const StartUserFunctionApiWithFirebase = () => async (dispatch) => {
 
       dispatch(
         loginSuccess({
-          user: data.user,
+          user: {...data.user}
         })
       );
 
@@ -196,6 +223,104 @@ export const StartUserFunctionApiWithFirebase = () => async (dispatch) => {
 
 
 
+
+// import {
+//     loginSuccess,
+//     logOut,
+//     lodingRequest,
+// } from "./User_action";
+
+
+
+export const initializeAuth = () => {
+  return null 
+
+    // return async (dispatch) => {
+
+    //     dispatch(lodingRequest());
+
+    //     try {
+
+    //         const accessToken =
+    //             localStorage.getItem("accessToken");
+
+    //         if (!accessToken) {
+    //             throw new Error("No access token found");
+    //         }
+
+    //         const response =
+    //             await getCurrentUser(accessToken);
+    //         console.log("Current user fetched:", response);
+    //         const currentUser =
+    //             response.data.user;
+
+    //         dispatch(
+    //             loginSuccess({
+    //                 user: currentUser,
+    //             })
+    //         );
+
+    //     } catch (error) {
+
+    //         console.error(
+    //             "Access token failed:",
+    //             error
+    //         );
+
+    //         try {
+
+    //             const response =
+    //                 await refreshAccessToken();
+
+    //             if (
+    //                 response.status !== 200 ||
+    //                 !response.data.success
+    //             ) {
+    //                 throw new Error(
+    //                     "Refresh token failed"
+    //                 );
+    //             }
+
+    //             localStorage.setItem(
+    //                 "accessToken",
+    //                 response.data.accessToken
+    //             );
+
+    //             const userResponse =
+    //                 await getCurrentUser(
+    //                     response.data.accessToken
+    //                 );
+    //               console.log("New access   ",userResponse.data.user);
+
+    //             dispatch(
+    //                 loginSuccess({
+    //                     email: {email: userResponse.data.user.email, username: userResponse.data.user.username, id: userResponse.data.user.id},
+    //                 })
+    //             );
+
+    //         } 
+    //         catch (refreshError) {
+
+    //             console.error(
+    //                 "Refresh token failed:",
+    //                 refreshError
+    //             );
+
+    //             localStorage.removeItem(
+    //                 "accessToken"
+    //             );
+
+    //             dispatch(logOut());
+
+    //         }
+
+    //     }
+
+    // };
+
+};
+
+
 export default {
     loginRequest,
     loginSuccess,
@@ -205,4 +330,5 @@ export default {
     updateProfile,
     StartUserFunctionApi,
     StartUserFunctionApiWithFirebase
+    , initializeAuth
 }

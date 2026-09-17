@@ -1,0 +1,1057 @@
+/* =====================================================
+   DIRECTORY CARD
+===================================================== */
+
+.directory-card {
+
+    width: 100%;
+
+    padding: 8px 8px 12px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    user-select: none;
+
+}
+
+
+/* =====================================================
+   PROJECT STACK
+===================================================== */
+
+.directory-stack {
+
+    position: relative;
+
+    width: 100%;
+
+    /*
+        Gives the rotated cards enough room
+        without making the card unnecessarily tall.
+    */
+    aspect-ratio: 1 / 0.78;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   PROJECT CARD
+===================================================== */
+
+.directory-stack-item {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 74%;
+
+    height: 88%;
+
+    padding: 0;
+
+    margin: 0;
+
+    border: 0;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    transform-origin: center center;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.28s ease,
+        filter 0.28s ease,
+        box-shadow 0.28s ease;
+
+}
+
+
+/* =====================================================
+   PROJECT IMAGE
+===================================================== */
+
+.directory-stack-item img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+}
+
+
+/* =====================================================
+   FRONT PROJECT
+===================================================== */
+
+.stack-item-0 {
+
+    z-index: 4;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(0deg);
+
+    filter: brightness(1);
+
+    box-shadow:
+        0 12px 26px rgba(0, 0, 0, 0.16);
+
+}
+
+
+/* =====================================================
+   SECOND PROJECT - LEFT
+===================================================== */
+
+.stack-item-1 {
+
+    z-index: 3;
+
+    transform:
+        translate(
+            calc(-50% - 5px),
+            calc(-50% + 2px)
+        )
+        rotate(-3deg);
+
+    /*
+        Slightly darker than front.
+    */
+    filter:
+        brightness(0.78)
+        saturate(0.88);
+
+}
+
+
+/* =====================================================
+   THIRD PROJECT - RIGHT
+===================================================== */
+
+.stack-item-2 {
+
+    z-index: 2;
+
+    transform:
+        translate(
+            calc(-50% + 5px),
+            calc(-50% + 4px)
+        )
+        rotate(3deg);
+
+    /*
+        Darker because it is further behind.
+    */
+    filter:
+        brightness(0.68)
+        saturate(0.82);
+
+}
+
+
+/* =====================================================
+   FOURTH PROJECT - BACK
+===================================================== */
+
+.stack-item-3 {
+
+    z-index: 1;
+
+    transform:
+        translate(
+            calc(-50% - 8px),
+            calc(-50% + 6px)
+        )
+        rotate(-5deg);
+
+    /*
+        Darkest card in the stack.
+    */
+    filter:
+        brightness(0.58)
+        saturate(0.76);
+
+}
+
+
+/* =====================================================
+   HOVER - FRONT
+===================================================== */
+
+.directory-card:hover
+.stack-item-0 {
+
+    transform:
+        translate(
+            -50%,
+            calc(-50% - 5px)
+        )
+        rotate(0deg);
+
+    filter: brightness(1);
+
+    box-shadow:
+        0 16px 32px rgba(0, 0, 0, 0.18);
+
+}
+
+
+/* =====================================================
+   HOVER - SECOND
+===================================================== */
+
+.directory-card:hover
+.stack-item-1 {
+
+    transform:
+        translate(
+            calc(-50% - 9px),
+            calc(-50% + 2px)
+        )
+        rotate(-4deg);
+
+    filter:
+        brightness(0.75)
+        saturate(0.86);
+
+}
+
+
+/* =====================================================
+   HOVER - THIRD
+===================================================== */
+
+.directory-card:hover
+.stack-item-2 {
+
+    transform:
+        translate(
+            calc(-50% + 9px),
+            calc(-50% + 4px)
+        )
+        rotate(4deg);
+
+    filter:
+        brightness(0.65)
+        saturate(0.80);
+
+}
+
+
+/* =====================================================
+   HOVER - BACK
+===================================================== */
+
+.directory-card:hover
+.stack-item-3 {
+
+    transform:
+        translate(
+            calc(-50% - 13px),
+            calc(-50% + 6px)
+        )
+        rotate(-6deg);
+
+    filter:
+        brightness(0.55)
+        saturate(0.74);
+
+}
+
+
+/* =====================================================
+   CLICK FEEDBACK
+===================================================== */
+
+.directory-stack-item:active {
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.98);
+
+}
+
+
+/* =====================================================
+   DIRECTORY NAME
+===================================================== */
+
+.directory-name {
+
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding: 0 4px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.2px;
+
+    color: #1f1f1f;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* =====================================================
+   EMPTY DIRECTORY
+===================================================== */
+
+.directory-card-empty {
+
+    cursor: pointer;
+
+}
+
+
+.directory-empty-preview {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 0.78;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #f7f7f7;
+
+    border: 1px dashed #d6d6d6;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   ADD BUTTON
+===================================================== */
+
+.directory-empty-add {
+
+    width: 54px;
+
+    height: 54px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #ffffff;
+
+    color: #292929;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.directory-empty-add:hover {
+
+    transform: scale(1.07);
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.16);
+
+}
+
+
+.directory-empty-add:active {
+
+    transform: scale(0.95);
+
+}
+
+
+/* =====================================================
+   MISSING IMAGE
+===================================================== */
+
+.directory-no-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    background: #dedede;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.directory-stack-loading {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 74%;
+
+    height: 88%;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #eeeeee 25%,
+            #f8f8f8 50%,
+            #eeeeee 75%
+        );
+
+    background-size: 200% 100%;
+
+    animation:
+        directory-loading 1.3s infinite;
+
+}
+
+
+/* =====================================================
+   LOADING POSITIONS
+===================================================== */
+
+.stack-loading-1 {
+
+    z-index: 4;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(0deg);
+
+}
+
+
+.stack-loading-2 {
+
+    z-index: 3;
+
+    transform:
+        translate(
+            calc(-50% - 5px),
+            calc(-50% + 2px)
+        )
+        rotate(-3deg);
+
+}
+
+
+.stack-loading-3 {
+
+    z-index: 2;
+
+    transform:
+        translate(
+            calc(-50% + 5px),
+            calc(-50% + 4px)
+        )
+        rotate(3deg);
+
+}
+
+
+.stack-loading-4 {
+
+    z-index: 1;
+
+    transform:
+        translate(
+            calc(-50% - 8px),
+            calc(-50% + 6px)
+        )
+        rotate(-5deg);
+
+}
+
+
+/* =====================================================
+   LOADING ANIMATION
+===================================================== */
+
+@keyframes directory-loading {
+
+    0% {
+
+        background-position:
+            200% 0;
+
+    }
+
+    100% {
+
+        background-position:
+            -200% 0;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .directory-card {
+
+        padding:
+            6px
+            6px
+            10px;
+
+    }
+
+    .directory-stack-item {
+
+        width: 76%;
+
+        height: 88%;
+
+    }
+
+    .directory-name {
+
+        font-size: 16px;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .directory-card {
+
+        padding:
+            5px
+            4px
+            8px;
+
+    }
+
+    .directory-stack {
+
+        aspect-ratio: 1 / 0.82;
+
+    }
+
+    .directory-stack-item {
+
+        width: 78%;
+
+        height: 86%;
+
+        border-radius: 12px;
+
+    }
+
+    .directory-name {
+
+        margin-top: 7px;
+
+        font-size: 15px;
+
+        font-weight: 700;
+
+    }
+
+    .directory-empty-preview {
+
+        border-radius: 12px;
+
+    }
+
+    .directory-empty-add {
+
+        width: 50px;
+
+        height: 50px;
+
+    }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .directory-stack-item {
+
+        transition: none;
+
+    }
+
+    .directory-empty-add {
+
+        transition: none;
+
+    }
+
+    .directory-stack-loading {
+
+        animation: none;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   DIRECTORY CARD VARIATIONS
+===================================================== */
+
+
+/* =====================================================
+   VARIANT 0
+   Balanced / Classic
+===================================================== */
+
+.directory-card-0 .stack-item-0 {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(0deg);
+
+}
+
+.directory-card-0 .stack-item-1 {
+
+    transform:
+        translate(
+            calc(-50% - 6px),
+            calc(-50% + 2px)
+        )
+        rotate(-3deg);
+
+}
+
+.directory-card-0 .stack-item-2 {
+
+    transform:
+        translate(
+            calc(-50% + 6px),
+            calc(-50% + 4px)
+        )
+        rotate(3deg);
+
+}
+
+.directory-card-0 .stack-item-3 {
+
+    transform:
+        translate(
+            calc(-50% - 10px),
+            calc(-50% + 6px)
+        )
+        rotate(-5deg);
+
+}
+
+
+/* =====================================================
+   VARIANT 1
+   Tilt RIGHT
+===================================================== */
+
+.directory-card-1 .stack-item-0 {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(2deg);
+
+}
+
+.directory-card-1 .stack-item-1 {
+
+    transform:
+        translate(
+            calc(-50% + 5px),
+            calc(-50% + 2px)
+        )
+        rotate(5deg);
+
+}
+
+.directory-card-1 .stack-item-2 {
+
+    transform:
+        translate(
+            calc(-50% + 10px),
+            calc(-50% + 4px)
+        )
+        rotate(8deg);
+
+}
+
+.directory-card-1 .stack-item-3 {
+
+    transform:
+        translate(
+            calc(-50% + 13px),
+            calc(-50% + 6px)
+        )
+        rotate(11deg);
+
+}
+
+
+/* =====================================================
+   VARIANT 2
+   Tilt LEFT
+===================================================== */
+
+.directory-card-2 .stack-item-0 {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-2deg);
+
+}
+
+.directory-card-2 .stack-item-1 {
+
+    transform:
+        translate(
+            calc(-50% - 5px),
+            calc(-50% + 2px)
+        )
+        rotate(-5deg);
+
+}
+
+.directory-card-2 .stack-item-2 {
+
+    transform:
+        translate(
+            calc(-50% - 10px),
+            calc(-50% + 4px)
+        )
+        rotate(-8deg);
+
+}
+
+.directory-card-2 .stack-item-3 {
+
+    transform:
+        translate(
+            calc(-50% - 13px),
+            calc(-50% + 6px)
+        )
+        rotate(-11deg);
+
+}
+
+
+/* =====================================================
+   VARIANT 3
+   WIDE / OPEN STACK
+===================================================== */
+
+.directory-card-3 .stack-item-0 {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-1deg);
+
+}
+
+.directory-card-3 .stack-item-1 {
+
+    transform:
+        translate(
+            calc(-50% - 10px),
+            calc(-50% + 3px)
+        )
+        rotate(-5deg);
+
+}
+
+.directory-card-3 .stack-item-2 {
+
+    transform:
+        translate(
+            calc(-50% + 10px),
+            calc(-50% + 4px)
+        )
+        rotate(5deg);
+
+}
+
+.directory-card-3 .stack-item-3 {
+
+    transform:
+        translate(
+            calc(-50% + 16px),
+            calc(-50% + 7px)
+        )
+        rotate(9deg);
+
+}
+
+
+/* =====================================================
+   VARIANT 4
+   SLIGHTLY HIGH / TIGHT
+===================================================== */
+
+.directory-card-4 .stack-item-0 {
+
+    transform:
+        translate(
+            -50%,
+            calc(-50% - 3px)
+        )
+        rotate(1deg);
+
+}
+
+.directory-card-4 .stack-item-1 {
+
+    transform:
+        translate(
+            calc(-50% - 5px),
+            calc(-50% - 1px)
+        )
+        rotate(-4deg);
+
+}
+
+.directory-card-4 .stack-item-2 {
+
+    transform:
+        translate(
+            calc(-50% + 5px),
+            calc(-50% + 1px)
+        )
+        rotate(4deg);
+
+}
+
+.directory-card-4 .stack-item-3 {
+
+    transform:
+        translate(
+            calc(-50% - 8px),
+            calc(-50% + 3px)
+        )
+        rotate(-7deg);
+
+}
+
+
+/* =====================================================
+   VARIANT 5
+   SOFT DIAGONAL
+===================================================== */
+
+.directory-card-5 .stack-item-0 {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-3deg);
+
+}
+
+.directory-card-5 .stack-item-1 {
+
+    transform:
+        translate(
+            calc(-50% - 7px),
+            calc(-50% + 2px)
+        )
+        rotate(-6deg);
+
+}
+
+.directory-card-5 .stack-item-2 {
+
+    transform:
+        translate(
+            calc(-50% + 4px),
+            calc(-50% + 4px)
+        )
+        rotate(2deg);
+
+}
+
+.directory-card-5 .stack-item-3 {
+
+    transform:
+        translate(
+            calc(-50% + 10px),
+            calc(-50% + 7px)
+        )
+        rotate(7deg);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   DEPTH / SHADING
+===================================================== */
+
+.stack-item-0 {
+
+    filter:
+        brightness(1)
+        saturate(1);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.16);
+
+}
+
+
+.stack-item-1 {
+
+    filter:
+        brightness(0.82)
+        saturate(0.90);
+
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.13);
+
+}
+
+
+.stack-item-2 {
+
+    filter:
+        brightness(0.70)
+        saturate(0.84);
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.11);
+
+}
+
+
+.stack-item-3 {
+
+    filter:
+        brightness(0.58)
+        saturate(0.78);
+
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.09);
+
+}
+
+
+/* =====================================================
+   UNIVERSAL HOVER
+===================================================== */
+
+.directory-card:hover
+.stack-item-0 {
+
+    transform:
+        translate(
+            -50%,
+            calc(-50% - 5px)
+        )
+        scale(1.015);
+
+    filter:
+        brightness(1)
+        saturate(1);
+
+    box-shadow:
+        0 16px 32px rgba(0, 0, 0, 0.18);
+
+}

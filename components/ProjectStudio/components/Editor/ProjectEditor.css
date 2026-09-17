@@ -1,0 +1,65 @@
+.project-editor-wrapper {
+    width: 100%;
+    padding: 32px;
+}
+
+.project-editor {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+
+    overflow: hidden;
+}
+
+.project-editor-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 180px;
+
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+
+    background: #fafafa;
+
+    color: #9ca3af;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1024px) {
+    .project-editor-wrapper {
+        padding: 24px;
+    }
+
+    .project-editor {
+        border-radius: 16px;
+    }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 768px) {
+    .project-editor-wrapper {
+        padding: 16px;
+    }
+
+    .project-editor {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .project-editor-placeholder {
+        min-height: 140px;
+    }
+}
