@@ -2,8 +2,10 @@
 
 import axios from "axios";
 
+const APP_API_URL = import.meta.env.APP_API_URL || "http://localhost:8080";
+
 export const UserLoginAPI = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: APP_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

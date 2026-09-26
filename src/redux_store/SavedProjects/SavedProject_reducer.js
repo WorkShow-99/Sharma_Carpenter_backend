@@ -300,51 +300,120 @@ case FETCH_DIRECTORY_PROJECTS_REQUEST: {
         //         }
         //     };
         // }
+        // case FETCH_DIRECTORY_PROJECTS_SUCCESS: {
+
+        //     const {
+        //         directoryId,
+        //         projects,
+        //         nextCursor,
+        //         hasMore,
+        //         reset
+        //     } = action.payload;
+
+        //     const existing =
+        //         state.directoryProjects[directoryId];
+
+        //     return {
+        //         ...state,
+
+        //         loading: false,
+        //         error: null,
+
+        //         directoryProjects: {
+
+        //             ...state.directoryProjects,
+
+        //             [directoryId]: {
+
+        //                 projects: reset
+        //                     ? projects
+        //                     : [
+        //                         ...(existing?.projects || []),
+        //                         ...projects
+        //                     ],
+
+        //                 nextCursor,
+
+        //                 hasMore,
+
+        //                 loading: false,
+
+        //                 error: null,
+        //                 initialized: true
+        //             }
+        //         }
+        //     };
+        // }
+        
         case FETCH_DIRECTORY_PROJECTS_SUCCESS: {
 
-            const {
-                directoryId,
-                projects,
-                nextCursor,
-                hasMore,
-                reset
-            } = action.payload;
+                    const {
+                        directoryId,
+                        projects,
+                        nextCursor,
+                        hasMore,
+                        reset
+                    } = action.payload;
 
-            const existing =
-                state.directoryProjects[directoryId];
 
-            return {
-                ...state,
+                    const existing =
+                        state.directoryProjects[directoryId];
 
-                loading: false,
-                error: null,
 
-                directoryProjects: {
+                    const existingProjects =
+                        existing?.projects || [];
 
-                    ...state.directoryProjects,
 
-                    [directoryId]: {
-
-                        projects: reset
+                    const combinedProjects =
+                        reset
                             ? projects
                             : [
-                                ...(existing?.projects || []),
+                                ...existingProjects,
                                 ...projects
-                            ],
+                            ];
 
-                        nextCursor,
 
-                        hasMore,
+                    const uniqueProjects =
+                        Array.from(
+                            new Map(
+                                combinedProjects.map(
+                                    project => [
+                                        project._id.toString(),
+                                        project
+                                    ]
+                                )
+                            ).values()
+                        );
 
-                        loading: false,
 
-                        error: null,
-                        initialized: true
-                    }
-                }
-            };
-        }
-        
+                    return {
+
+                        ...state,
+
+                        directoryProjects: {
+
+                            ...state.directoryProjects,
+
+                            [directoryId]: {
+
+                                ...existing,
+
+                                projects:
+                                    uniqueProjects,
+
+                                nextCursor,
+
+                                hasMore,
+
+                                loading: false,
+
+                                error: null,
+
+                                initialized: true
+                            }
+                        }
+                    };
+                            }
 
         // case FETCH_DIRECTORY_PROJECTS_FAILURE: {
 

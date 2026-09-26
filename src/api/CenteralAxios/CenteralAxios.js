@@ -143,24 +143,246 @@
 
 
 
+// import axios from "axios";
+// import AuthAPI from "./AuthAPI.js";
+
+// import store from "../../../src/redux_store/main_store.js";
+// import { logOut } from "../../../src/redux_store/User_redux/User_function";
+
+// const API = axios.create({
+//     baseURL: "http://localhost:8080/",
+//     headers: {
+//         "Content-Type": "application/json",
+//     },
+//     withCredentials: true,
+// });
+
+
+// // =====================================
+// // REFRESH STATE
+// // =====================================
+
+// let refreshPromise = null;
+
+
+// // =====================================
+// // REQUEST INTERCEPTOR
+// // =====================================
+
+// API.interceptors.request.use(
+//     (config) => {
+
+//         const accessToken =
+//             localStorage.getItem("accessToken");
+
+//         if (accessToken) {
+
+//             config.headers.Authorization =
+//                 `Bearer ${accessToken}`;
+//         }
+
+//         return config;
+//     },
+
+//     (error) => {
+//         return Promise.reject(error);
+//     }
+// );
+
+
+// // =====================================
+// // RESPONSE INTERCEPTOR
+// // =====================================
+
+// API.interceptors.response.use(
+
+//     (response) => {
+//         return response;
+//     },
+
+//     async (error) => {
+
+//         const originalRequest =
+//             error.config;
+
+
+//         // =================================
+//         // NOT A 401
+//         // =================================
+
+//         if (
+//             error.response?.status !== 401 ||
+//             !originalRequest
+//         ) {
+//             return Promise.reject(error);
+//         }
+
+
+//         // =================================
+//         // REQUEST ALREADY RETRIED
+//         // =================================
+
+//         if (originalRequest._retry) {
+//             return Promise.reject(error);
+//         }
+
+
+//         originalRequest._retry = true;
+
+
+//         try {
+
+//             // =================================
+//             // CREATE ONLY ONE REFRESH REQUEST
+//             // =================================
+
+//             if (!refreshPromise) {
+
+//                 refreshPromise =
+//                     AuthAPI
+//                         .post("/auth/refresh")
+//                         .then((response) => {
+
+//                             const newAccessToken =
+//                                 response.data?.accessToken;
+
+//                             if (!newAccessToken) {
+//                                 throw new Error(
+//                                     "No access token returned"
+//                                 );
+//                             }
+
+//                             localStorage.setItem(
+//                                 "accessToken",
+//                                 newAccessToken
+//                             );
+
+//                             return newAccessToken;
+//                         })
+//                         .finally(() => {
+
+//                             refreshPromise = null;
+
+//                         });
+//             }
+
+
+//             // =================================
+//             // WAIT FOR THE SAME REFRESH
+//             // =================================
+
+//             const newAccessToken =
+//                 await refreshPromise;
+
+
+//             // =================================
+//             // RETRY ORIGINAL REQUEST
+//             // =================================
+
+//             originalRequest.headers =
+//                 originalRequest.headers || {};
+
+//             originalRequest.headers.Authorization =
+//                 `Bearer ${newAccessToken}`;
+
+
+//             return API(originalRequest);
+
+
+//         } catch (refreshError) {
+
+//             console.error(
+//                 "Refresh token failed:",
+//                 refreshError
+//             );
+
+
+//             // =================================
+//             // LOG USER OUT
+//             // =================================
+
+//             localStorage.removeItem(
+//                 "accessToken"
+//             );
+
+//             localStorage.removeItem(
+//                 "user"
+//             );
+
+
+//             store.dispatch(
+//                 logOut()
+//             );
+
+
+//             return Promise.reject(
+//                 refreshError
+//             );
+//         }
+//     }
+// );
+
+
+// export default API;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import axios from "axios";
 import AuthAPI from "./AuthAPI.js";
 
+
+
 import store from "../../../src/redux_store/main_store.js";
-import { logOut } from "../../../src/redux_store/User_redux/User_function";
+import {
+    logOut
+} from "../../../src/redux_store/User_redux/User_function";
+
+const APP_API_URL = import.meta.env.APP_API_URL || "http://localhost:8080";
 
 const API = axios.create({
-    baseURL: "http://localhost:8080/",
+
+    baseURL: APP_API_URL || "http://localhost:8080/",
+
     headers: {
         "Content-Type": "application/json",
     },
+
     withCredentials: true,
+
 });
 
-
-// =====================================
-// REFRESH STATE
-// =====================================
 
 let refreshPromise = null;
 
@@ -170,23 +392,34 @@ let refreshPromise = null;
 // =====================================
 
 API.interceptors.request.use(
+
     (config) => {
 
         const accessToken =
             localStorage.getItem("accessToken");
 
+
         if (accessToken) {
+
+            config.headers =
+                config.headers || {};
 
             config.headers.Authorization =
                 `Bearer ${accessToken}`;
+
         }
 
+
         return config;
+
     },
 
     (error) => {
+
         return Promise.reject(error);
+
     }
+
 );
 
 
@@ -197,8 +430,11 @@ API.interceptors.request.use(
 API.interceptors.response.use(
 
     (response) => {
+
         return response;
+
     },
+
 
     async (error) => {
 
@@ -206,24 +442,28 @@ API.interceptors.response.use(
             error.config;
 
 
-        // =================================
-        // NOT A 401
-        // =================================
+        // ---------------------------------
+        // Not a 401
+        // ---------------------------------
 
         if (
             error.response?.status !== 401 ||
             !originalRequest
         ) {
+
             return Promise.reject(error);
+
         }
 
 
-        // =================================
-        // REQUEST ALREADY RETRIED
-        // =================================
+        // ---------------------------------
+        // Already retried
+        // ---------------------------------
 
         if (originalRequest._retry) {
+
             return Promise.reject(error);
+
         }
 
 
@@ -232,9 +472,9 @@ API.interceptors.response.use(
 
         try {
 
-            // =================================
-            // CREATE ONLY ONE REFRESH REQUEST
-            // =================================
+            // ---------------------------------
+            // Create ONE refresh request
+            // ---------------------------------
 
             if (!refreshPromise) {
 
@@ -246,41 +486,49 @@ API.interceptors.response.use(
                             const newAccessToken =
                                 response.data?.accessToken;
 
+
                             if (!newAccessToken) {
+
                                 throw new Error(
                                     "No access token returned"
                                 );
+
                             }
+
 
                             localStorage.setItem(
                                 "accessToken",
                                 newAccessToken
                             );
 
+
                             return newAccessToken;
+
                         })
                         .finally(() => {
 
                             refreshPromise = null;
 
                         });
+
             }
 
 
-            // =================================
-            // WAIT FOR THE SAME REFRESH
-            // =================================
+            // ---------------------------------
+            // Wait for refresh
+            // ---------------------------------
 
             const newAccessToken =
                 await refreshPromise;
 
 
-            // =================================
-            // RETRY ORIGINAL REQUEST
-            // =================================
+            // ---------------------------------
+            // Retry original request
+            // ---------------------------------
 
             originalRequest.headers =
                 originalRequest.headers || {};
+
 
             originalRequest.headers.Authorization =
                 `Bearer ${newAccessToken}`;
@@ -292,18 +540,15 @@ API.interceptors.response.use(
         } catch (refreshError) {
 
             console.error(
-                "Refresh token failed:",
+                "Authentication refresh failed:",
                 refreshError
             );
 
 
-            // =================================
-            // LOG USER OUT
-            // =================================
-
             localStorage.removeItem(
                 "accessToken"
             );
+
 
             localStorage.removeItem(
                 "user"
@@ -318,8 +563,11 @@ API.interceptors.response.use(
             return Promise.reject(
                 refreshError
             );
+
         }
+
     }
+
 );
 
 

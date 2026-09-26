@@ -2,8 +2,10 @@
 import axios from "axios";
 
 
+const APP_API_URL = import.meta.env.APP_API_URL || "http://localhost:8080";
+
 const SaveDirectoryAPI = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: APP_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -41,7 +43,7 @@ SaveDirectoryAPI.interceptors.response.use(
 
       try {
         const refreshResponse = await axios.post(
-          "http://localhost:8080/api/auth/refresh",
+          `${APP_API_URL}/api/auth/refresh`,
           {},
           { withCredentials: true }
         );

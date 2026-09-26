@@ -229,48 +229,277 @@
 
 
 
+// import "./DashboardSaved.css";
+
+// import { Bookmark, FolderPlus } from "lucide-react";
+// import { useNavigate } from "react-router-dom";
+// import { useSelector } from "react-redux";
+
+// import UnorganizedProjects from "./ProjectUnorganized/ProjectUnorganized.jsx";
+// import ProjectDirectories from "./ProjectDirectory/ProjectDirectory.jsx";
+
+
+// export default function SavedProjects() {
+
+//     const navigate = useNavigate();
+
+
+//     // ==========================================
+//     // SAVED PROJECTS REDUX
+//     // ==========================================
+
+//     const savedProjects = useSelector(
+//         state => state.savedProjects
+//     );
+
+
+//     // ==========================================
+//     // SAVED DIRECTORY REDUX
+//     // ==========================================
+
+//     const savedDirectory = useSelector(
+//         state => state.savedDirectory
+//     );
+
+
+//     console.log(
+//         "Saved Projects:",
+//         savedProjects
+//     );
+
+//     console.log(
+//         "Saved Directories:",
+//         savedDirectory
+//     );
+
+
+//     // ==========================================
+//     // CREATE DIRECTORY
+//     // ==========================================
+
+//     const handleCreateDirectory = () => {
+
+//         console.log(
+//             "Create directory clicked"
+//         );
+
+//         // We will implement this later.
+//     };
+
+
+//     // ==========================================
+//     // LOADING / EMPTY STATE
+//     // ==========================================
+
+//     const hasSavedProjects =
+//         savedProjects?.unorganizedProjects?.length > 0 ||
+//         savedDirectory?.directories?.length > 0;
+
+
+//     if (
+//         savedProjects?.initialized &&
+//         savedDirectory?.initialized &&
+//         !hasSavedProjects
+//     ) {
+
+//         return (
+
+//             <section className="saved-empty">
+
+//                 <Bookmark
+//                     size={70}
+//                     strokeWidth={1.5}
+//                 />
+
+//                 <h2>
+//                     No Saved Projects Yet
+//                 </h2>
+
+//                 <p>
+//                     Save projects you like and they'll
+//                     always be available here.
+//                 </p>
+
+//                 <div className="saved-empty-actions">
+
+//                     <button
+//                         onClick={handleCreateDirectory}
+//                     >
+//                         <FolderPlus size={18} />
+
+//                         Create Directory
+//                     </button>
+
+
+//                     <button
+//                         onClick={() => navigate("/explore")}
+//                     >
+//                         Explore Projects
+//                     </button>
+
+//                 </div>
+
+//             </section>
+
+//         );
+//     }
+
+
+//     // ==========================================
+//     // SAVED PROJECTS
+//     // ==========================================
+
+//     return (
+
+//         <section className="saved-projects">
+
+//             {/* =================================
+//                 HEADER
+//             ================================= */}
+
+//             <div className="saved-header">
+
+//                 <div>
+
+//                     <h2>
+//                         Saved Projects
+//                     </h2>
+
+                  
+
+//                 </div>
+
+
+//                 {/* <button
+//                     onClick={handleCreateDirectory}
+//                 > */}
+
+//                     {/* <FolderPlus size={18} /> */}
+
+//                     {/* Create Directory */}
+
+//                 {/* </button> */}
+
+//             </div>
+//                 {/* =================================
+//                                 PROJECT DIRECTORIES
+//                             ================================= */}
+
+//             <ProjectDirectories />
+
+//             {/* =================================
+//                 UNORGANIZED PROJECTS
+//             ================================= */}
+
+//             <UnorganizedProjects />
+
+
+           
+
+//         </section>
+
+//     );
+// }
+
+
+
+
+
 import "./DashboardSaved.css";
 
-import { Bookmark, FolderPlus } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {
+    Bookmark,
+    FolderPlus
+} from "lucide-react";
 
-import UnorganizedProjects from "./ProjectUnorganized/ProjectUnorganized.jsx";
-import ProjectDirectories from "./ProjectDirectory/ProjectDirectory.jsx";
+import {
+    useNavigate,
+    useOutlet
+    , Outlet
+} from "react-router-dom";
+
+import {
+    useSelector
+} from "react-redux";
+
+import {
+    useState
+} from "react";
 
 
+import UnorganizedProjects
+    from "./ProjectUnorganized/ProjectUnorganized.jsx";
+
+import ProjectDirectories
+    from "./ProjectDirectory/ProjectDirectory.jsx";
+
+
+import {DirectoryUnorganizedHolder} from "./Directory_Unorganized/DirecotryUnorganizedHolder.jsx";
 export default function SavedProjects() {
 
-    const navigate = useNavigate();
+    const navigate =
+        useNavigate();
 
+    // const Outlet =
+    //     useOutlet();
+
+
+    // ==========================================
+    // SELECTED DIRECTORY
+    // ==========================================
+
+    const [directoryMode, setDirectoryMode] =
+        useState(false);
 
     // ==========================================
     // SAVED PROJECTS REDUX
     // ==========================================
 
-    const savedProjects = useSelector(
-        state => state.savedProjects
-    );
+   
+    const savedProjects =
+        useSelector(
+            state =>
+                state.savedProjects
+        );
 
 
     // ==========================================
     // SAVED DIRECTORY REDUX
     // ==========================================
 
-    const savedDirectory = useSelector(
-        state => state.savedDirectory
-    );
+    const savedDirectory =
+        useSelector(
+            state =>
+                state.savedDirectory
+        );
 
 
-    console.log(
-        "Saved Projects:",
-        savedProjects
-    );
+    // ==========================================
+    // DIRECTORY CLICK
+    // ==========================================
 
-    console.log(
-        "Saved Directories:",
-        savedDirectory
-    );
+    const handleDirectoryClick = (
+        directory
+    ) => {
+
+        console.log(
+            "Opening directory:",
+            directory
+        );
+
+        setDirectoryMode(true);
+
+        navigate(
+            `/explore/saved/directory/${directory._id}`,
+            {
+                state: {
+                    backgroundLocation:
+                        location
+                }
+            }
+        );
+
+    };
 
 
     // ==========================================
@@ -283,58 +512,84 @@ export default function SavedProjects() {
             "Create directory clicked"
         );
 
-        // We will implement this later.
+        // Implement later
+
     };
 
 
     // ==========================================
-    // LOADING / EMPTY STATE
+    // EMPTY STATE
     // ==========================================
 
     const hasSavedProjects =
-        savedProjects?.unorganizedProjects?.length > 0 ||
-        savedDirectory?.directories?.length > 0;
+        savedProjects
+            ?.unorganizedProjects
+            ?.length > 0
+        ||
+        savedDirectory
+            ?.directories
+            ?.length > 0;
 
 
     if (
-        savedProjects?.initialized &&
+        savedProjects?.unorganizedInitialized &&
         savedDirectory?.initialized &&
         !hasSavedProjects
     ) {
 
         return (
 
-            <section className="saved-empty">
+            <section
+                className="saved-empty"
+            >
 
                 <Bookmark
                     size={70}
                     strokeWidth={1.5}
                 />
 
+
                 <h2>
                     No Saved Projects Yet
                 </h2>
 
+
                 <p>
-                    Save projects you like and they'll
-                    always be available here.
+                    Save projects you like
+                    and they'll always be
+                    available here.
                 </p>
 
-                <div className="saved-empty-actions">
+
+                <div
+                    className="saved-empty-actions"
+                >
 
                     <button
-                        onClick={handleCreateDirectory}
+                        onClick={
+                            handleCreateDirectory
+                        }
                     >
-                        <FolderPlus size={18} />
+
+                        <FolderPlus
+                            size={18}
+                        />
 
                         Create Directory
+
                     </button>
 
 
                     <button
-                        onClick={() => navigate("/explore")}
+                        onClick={() =>
+                            navigate(
+                                "/explore"
+                            )
+                        }
                     >
+
                         Explore Projects
+
                     </button>
 
                 </div>
@@ -342,22 +597,30 @@ export default function SavedProjects() {
             </section>
 
         );
+
     }
 
 
     // ==========================================
-    // SAVED PROJECTS
+    // NORMAL SAVED PROJECTS
     // ==========================================
 
     return (
 
-        <section className="saved-projects">
+        <section
+            className="saved-projects"
+        >
+
 
             {/* =================================
                 HEADER
             ================================= */}
+            <Outlet />
 
-            <div className="saved-header">
+
+            <div
+                className="saved-header"
+            >
 
                 <div>
 
@@ -365,35 +628,12 @@ export default function SavedProjects() {
                         Saved Projects
                     </h2>
 
-                    <p>
-                        Organize the projects you've saved.
-                    </p>
-
                 </div>
 
-
-                <button
-                    onClick={handleCreateDirectory}
-                >
-
-                    <FolderPlus size={18} />
-
-                    Create Directory
-
-                </button>
-
             </div>
-                {/* =================================
-                                PROJECT DIRECTORIES
-                            ================================= */}
 
-            <ProjectDirectories />
 
-            {/* =================================
-                UNORGANIZED PROJECTS
-            ================================= */}
 
-            <UnorganizedProjects />
 
 
            
@@ -401,4 +641,5 @@ export default function SavedProjects() {
         </section>
 
     );
+
 }

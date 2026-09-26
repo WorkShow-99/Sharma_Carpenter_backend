@@ -3,6 +3,8 @@
     column-count: 1;
     column-fill: balance;
     padding: 20px;
+    z-index: 12;
+    background: #f3f0f0;
 }
 
 

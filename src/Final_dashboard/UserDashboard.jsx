@@ -17,7 +17,7 @@ import {addNotification} from "../../src/redux_store/Notification_redux/Notifica
 // import {resetLikedProjects} from "../../src/redux_store/LikedProject/LikedProjects_actions";
 
 import {clearDirectories} from "../../src/redux_store/SavedDirectory/SavedDirectory_actions";
-import{ fetchUnorganizedProjects} from "../../src/redux_store/SavedProjects/SavedProject_action.js";
+import{ fetchUnorganizedProjects,resetSavedProjects} from "../../src/redux_store/SavedProjects/SavedProject_action.js";
 
 
 export default function UserDashboard() {
@@ -42,7 +42,7 @@ export default function UserDashboard() {
                 );
 
                 dispatch(resetLikedProjects());
-                // dispatch(resetSavedProjects());
+                dispatch(resetSavedProjects());
                 dispatch(clearDirectories());
 
             };

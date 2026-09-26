@@ -1,0 +1,514 @@
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.menu-project-container {
+
+    position: fixed;
+
+    width: 190px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 10px;
+
+    padding: 6px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.16);
+
+    z-index: 999999;
+
+    transform-origin: top right;
+
+    animation:
+        menuProjectIn
+        0.15s
+        ease
+        forwards;
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.menu-project-container button {
+
+    width: 100%;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 9px 10px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #222;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.menu-project-container button:hover {
+
+    background: #f4f4f4;
+
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.menu-project-container button svg {
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================================================
+   DANGER
+   ========================================================= */
+
+.menu-project-container button.menu-project-danger {
+
+    color: #dc2626;
+
+}
+
+
+.menu-project-container button.menu-project-danger:hover {
+
+    background: #fef2f2;
+
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.menu-project-divider {
+
+    width: calc(100% - 8px);
+
+    height: 1px;
+
+    margin: 5px 4px;
+
+    background: #eeeeee;
+
+}
+
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes menuProjectIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-5px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL SCREEN
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .menu-project-container {
+
+        width: 180px;
+
+        max-width:
+            calc(100vw - 20px);
+
+        border-radius: 10px;
+
+        padding: 5px;
+
+    }
+
+
+    .menu-project-container button {
+
+        min-height: 44px;
+
+        padding:
+            10px 11px;
+
+        font-size: 14px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE OVERLAY
+   ========================================================= */
+
+.menu-project-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+}
+
+
+/* =========================================================
+   MOBILE BACKDROP
+   ========================================================= */
+
+.menu-project-mobile-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.38);
+}
+
+
+/* =========================================================
+   MOBILE BOTTOM SHEET
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile {
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    top: auto;
+
+    width: 100%;
+
+    max-height: 55vh;
+
+    padding: 12px 16px 20px;
+
+    border: none;
+
+    border-radius: 24px 24px 0 0;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 -8px 30px rgba(0, 0, 0, 0.18);
+
+    transform-origin: bottom center;
+
+    animation:
+        mobileMenuSlideUp
+        0.25s
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   MOBILE BUTTONS
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile button {
+
+    min-height: 58px;
+
+    padding: 10px 8px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    gap: 16px;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   MOBILE ICON
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile
+button svg {
+
+    width: 24px;
+    height: 24px;
+}
+
+
+/* =========================================================
+   MOBILE DIVIDER
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile
+.menu-project-divider {
+
+    margin: 8px 4px;
+}
+
+
+/* =========================================================
+   MOBILE ANIMATION
+   ========================================================= */
+
+@keyframes mobileMenuSlideUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(100%);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE OVERLAY
+   ========================================================= */
+
+.menu-project-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+}
+
+
+/* =========================================================
+   MOBILE BACKDROP
+   ========================================================= */
+
+.menu-project-mobile-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.38);
+}
+
+
+/* =========================================================
+   MOBILE BOTTOM SHEET
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile {
+
+    position: absolute;
+
+    /* Center horizontally */
+    left: 50%;
+    right: auto;
+
+    bottom: 0;
+
+    width: calc(100% - 28px);
+
+    max-width: 900px;
+
+    max-height: 55vh;
+
+    padding: 14px 22px 22px;
+
+    background: #ffffff;
+
+    border: none;
+
+    border-radius: 24px 24px 0 0;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 -8px 30px rgba(0, 0, 0, 0.18);
+
+    transform: translateX(-50%);
+
+    transform-origin: bottom center;
+
+    animation:
+        mobileMenuSlideUp
+        0.25s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
+}
+
+
+/* =========================================================
+   MOBILE BUTTONS
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile button {
+
+    width: 100%;
+
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 10px 8px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #222;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MOBILE BUTTON ACTIVE
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile button:active {
+    background: #f3f3f3;
+}
+
+
+/* =========================================================
+   MOBILE ICON
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile button svg {
+
+    width: 25px;
+    height: 25px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   MOBILE DIVIDER
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile
+.menu-project-divider {
+
+    width: 100%;
+
+    height: 1px;
+
+    margin: 10px 0;
+
+    background: #e5e5e5;
+}
+
+
+/* =========================================================
+   MOBILE DANGER
+   ========================================================= */
+
+.menu-project-container.menu-project-mobile
+.menu-project-danger {
+
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   MOBILE ANIMATION
+   ========================================================= */
+
+@keyframes mobileMenuSlideUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(100%);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+}

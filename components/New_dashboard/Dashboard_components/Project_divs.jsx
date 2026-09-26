@@ -615,15 +615,27 @@
 // }
 
 
+import {
+    saveProject,unsaveProject
+} from "../../../src/redux_store/SavedProjects/SavedProject_action.js";
 
 
+import {
+    useSelector,
+    useDispatch
+} from "react-redux";
 
 import "./ProjecxtCard.css";
 
+import ProjectMenu from "./ProjectCard/ProjectMenu/ProjectMenu.jsx";
+
 import {
     Heart,
-    ArrowUpRight
+    ArrowUpRight,
+    Eclipse,Bookmark,
+    MoreVertical
 } from "lucide-react";
+
 
 import {
     useNavigate,
@@ -632,12 +644,16 @@ import {
 
 import {
     useEffect,
-    useState
+    useState,
+    useRef
 } from "react";
 
-import {
-    useSelector
-} from "react-redux";
+
+
+
+import {addNotification} from "../../../src/redux_store/Notification_redux/Notification_actions.js";
+
+import API from "../../../src/api/CenteralAxios/CenteralAxios.js";
 
 
 export default function ProjectCard({
@@ -669,26 +685,82 @@ isLiked =false,
 
 }) {
 
-    console.log(
-    projectId,
-    "isLiked:",
-    isLiked,
-    "likes:",
-    likes
-);
+    
+
+    console.log(projectId,"isLiked:",isLiked,"likes:",likes);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+const [menuOpen, setMenuOpen] = useState(false);
 
+const menuButtonRef = useRef(null);
     const location = useLocation();
 
+    const [saved, setSaved] = useState(false);
 
+    const [saveLoading, setSaveLoading] =
+        useState(false);
+
+    const handleSave = async (event) => {
+
+            event.stopPropagation();
+
+            if (saveLoading || saved) {
+
+                try {
+                setSaveLoading(true);
+                dispatch(unsaveProject(projectId));
+                setSaved(false);
+
+               
+                } catch (error) {
+                    console.error(
+                        "Error unsaving project:",
+                        error
+                    );
+                } finally {
+                    setSaveLoading(false);
+                    setSaved(false);
+
+                }
+                return;
+                
+            }
+            
+            
+
+
+            try {
+
+                setSaveLoading(true);
+
+                 dispatch(
+                    saveProject(projectId, null)
+                );
+
+                setSaved(true);
+                
+
+            } catch (error) {
+                   
+                console.error(
+                    "Error saving project:",
+                    error
+                );
+                
+
+            } finally {
+
+                setSaveLoading(false);
+            }
+        };
     // ==========================================
     // LOGGED IN USER
     // ==========================================
 
-    const user = useSelector(
-        (state) => state.user?.user
-    );
+    // const user = useSelector(
+    //     (state) => state.user?.user
+    // );
 
 
     // ==========================================
@@ -718,11 +790,6 @@ isLiked =false,
     // UPDATE LOCAL COUNT WHEN PROP CHANGES
     // ==========================================
 
-    useEffect(() => {
-
-        setLikesCount(likes);
-
-    }, [likes]);
 
 
     // ==========================================
@@ -786,118 +853,151 @@ isLiked =false,
     // LIKE PROJECT
     // ==========================================
 
-    const handleLike = async (event) => {
 
-        event.stopPropagation();
+            const handleLike = async (event) => {
 
+            event.stopPropagation();
 
-        // Prevent multiple requests
-        if (likeLoading) {
-            return;
-        }
+            // console.log("LIKE CLICK");
 
-
-        // ======================================
-        // CHECK LOGIN
-        // ======================================
-
-        if (!user || !accessToken) {
-
-            console.log(
-                "User must be logged in to like a project"
-            );
-
-            /*
-             * Later we can replace this with:
-             *
-             * navigate("/login")
-             *
-             * or open a login modal.
-             */
-
-            return;
-
-        }
-
-
-        try {
 
             setLikeLoading(true);
 
+            // console.log("LOADING TRUE");
 
-            const response = await fetch(
-
-                `http://localhost:8080/api/projects/${projectId}/like`,
-
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json",
-
-                        "Authorization":
-                            `Bearer ${accessToken}`
-
-                    },
-
-                    credentials: "include"
-
-                }
-
+            const response = await API.post(
+                `/api/projects/${projectId}/like`
             );
 
+            const data = response.data;
 
-            const data =
-                await response.json();
+            // console.log("API RESPONSE");
 
+            setIsLiked(data.liked);
+            setLikesCount(data.likesCount);
 
-            // ==================================
-            // API ERROR
-            // ==================================
-
-            if (!response.ok) {
-
-                console.error(
-                    "Like API error:",
-                    data
-                );
-
-                return;
-
-            }
-
-
-            // ==================================
-            // UPDATE UI FROM SERVER
-            // ==================================
-
-            setIsLiked(
-                data.liked
-            );
-
-
-            setLikesCount(
-                data.likesCount
-            );
-
-
-        } catch (error) {
-
-            console.error(
-                "Error liking project:",
-                error
-            );
-
-        } finally {
+            // console.log("LIKE STATE UPDATED");
 
             setLikeLoading(false);
 
-        }
+            // console.log("LOADING FALSE");
+        };
+            // const handleLike = async (event) => {
 
-    };
+            //     event.stopPropagation();
+
+
+            //     // Prevent multiple requests
+            //     if (likeLoading) {
+            //         return;
+            //     }
+
+
+            //     // ======================================
+            //     // CHECK LOGIN
+            //     // ======================================
+
+            //     // if (!user || !accessToken) {
+
+            //     //     console.log(
+            //     //         "User must be logged in to like a project"
+            //     //     );
+
+            //     //     /*
+            //     //      * Later we can replace this with:
+            //     //      *
+            //     //      *
+            //     //      * or open a login modal.
+            //     //      */
+            //     //      navigate("/login")
+
+
+            //     //     return;
+
+            //     // }
+
+
+            //     try {
+
+            //         setLikeLoading(true);
+
+            //         const responsee  = await API.post(`/api/projects/${projectId}/like`
+                        
+            //         );
+
+            //         const data = responsee.data;
+            //         console.log("datā:", responsee.status, data);
+
+            //         if (responsee.status == 200 && data.success) {
+
+                    
+
+            //              setIsLiked(
+            //                 data.liked
+            //                 );
+
+
+            //                 setLikesCount(
+            //                     data.likesCount
+            //                 );
+
+
+
+            //             return;
+                    
+            //         }
+            //         else {
+
+            //             console.log("Like API response:",
+
+            //                 data
+            //             );
+            //             console.error(
+            //                 "Like API error:",
+            //                 responsee.data.error
+            //             );
+
+            //             throw new Error(
+            //                 data.message ||
+            //                 "Failed to like project"
+            //             );
+
+
+            //         }   
+
+                
+
+
+                
+
+
+            //         // ==================================
+            //         // API ERROR
+            //         // ==================================
+
+            
+
+            //         // ==================================
+            //         // UPDATE UI FROM SERVER
+            //         // ==================================
+
+                
+
+
+            //     } catch (error) {
+
+            //         console.error(
+            //             "Error liking project:",
+            //             error
+            //         );
+
+            //     } finally {
+
+            //         setLikeLoading(false);
+
+            //     }
+
+            // };
 
 
     return (
@@ -959,13 +1059,137 @@ isLiked =false,
                     />
 
                 )}
+{/* PROJECT MENU                       */}
+{/* ================================= */}
 
+{/* <div
+    className="project-menu-wrapper"
+    onClick={(event) => {
+        event.stopPropagation();
+    }}
+>
+
+    <button
+        type="button"
+        className="project-menu-button"
+    onClick={(event) => {
+
+    event.stopPropagation();
+
+    setMenuOpen(true);
+
+}}
+        aria-label="Project options"
+    >
+
+        <MoreVertical size={20} strokeWidth={2} />
+
+    </button>
+
+
+    {menuOpen && (
+
+        // <ProjectMenu
+        //     projectId={projectId}
+        //     saved={saved}
+
+        //     onSave={() => {
+        //         handleSave({
+        //             stopPropagation: () => {}
+        //         });
+        //         setMenuOpen(false);
+        //     }}
+
+        //     onDownload={(id) => {
+        //         console.log(
+        //             "Download project:",
+        //             id
+        //         );
+
+        //         setMenuOpen(false);
+        //     }}
+
+        //     onShare={(id) => {
+        //         console.log(
+        //             "Share project:",
+        //             id
+        //         );
+
+        //         setMenuOpen(false);
+        //     }}
+
+        //     onReport={(id) => {
+        //         console.log(
+        //             "Report project:",
+        //             id
+        //         );
+
+        //         setMenuOpen(false);
+        //     }}
+        // />
+<ProjectMenu
+    projectId={projectId}
+    saved={saved}
+
+    onClose={() => {
+        setMenuOpen(false);
+    }}
+
+    onSave={() => {
+
+        handleSave({
+            stopPropagation: () => {}
+        });
+
+        setMenuOpen(false);
+
+    }}
+
+    onDownload={(id) => {
+
+        console.log(
+            "Download:",
+            id
+        );
+
+        setMenuOpen(false);
+
+    }}
+
+    onShare={(id) => {
+
+        console.log(
+            "Share:",
+            id
+        );
+
+        setMenuOpen(false);
+
+    }}
+
+    onReport={(id) => {
+
+        console.log(
+            "Report:",
+            id
+        );
+
+        setMenuOpen(false);
+
+    }}
+/>
+    )}
+
+</div> */}
 
                 {/* ================================= */}
                 {/* HOVER OVERLAY                      */}
                 {/* ================================= */}
 
                 <div className="overlay">
+
+                    {/* ================================= */}
+
 
 
                     {/* ================================= */}
@@ -1042,7 +1266,7 @@ isLiked =false,
                     {/* VISIT OWNER                       */}
                     {/* ================================= */}
 
-                    <button
+                    {/* <button
 
                         className="visit-btn"
 
@@ -1056,7 +1280,32 @@ isLiked =false,
 
                         <ArrowUpRight />
 
-                    </button>
+                    </button> */}
+
+{/* -----------------------------save---------------- */}
+                    <button
+                            className={`save-btn ${
+                                saved ? "saved" : ""
+                            }`}
+                            onClick={handleSave}
+                            disabled={saveLoading}
+                        >
+                            <Bookmark
+                                size={20}
+                                fill={
+                                    saved
+                                        ? "currentColor"
+                                        : "none"
+                                }
+                            />
+
+                            {saveLoading
+                                ? "Saving..."
+                                : saved
+                                    ? "Saved"
+                                    : ""
+                            }
+                        </button>
 
 
                 </div>
@@ -1126,6 +1375,113 @@ isLiked =false,
                 </div>
 
             </div>
+
+    {/* ============================= */}
+    {/* THREE DOT MENU                 */}
+    {/* ============================= */}
+
+    <div
+        className="project-menu-wrapper"
+        onClick={(e) => e.stopPropagation()}
+    >
+
+        <button
+            type="button"
+            ref={menuButtonRef}
+            className="project-menu-button"
+            onClick={(e) => {
+                e.stopPropagation();
+                setMenuOpen(true);
+            }}
+            aria-label="Project options"
+        >
+            <MoreVertical size={21} strokeWidth={2} />
+        </button>
+
+
+        {/* {menuOpen && (
+
+            <ProjectMenu
+                projectId={projectId}
+                saved={saved}
+
+                onClose={() => setMenuOpen(false)}
+
+                onSave={() => {
+                    handleSave();
+                    setMenuOpen(false);
+                }}
+
+                onDownload={() => {
+                    console.log("Download", projectId);
+                    setMenuOpen(false);
+                }}
+
+                onShare={() => {
+                    console.log("Share", projectId);
+                    setMenuOpen(false);
+                }}
+
+                onReport={() => {
+                    console.log("Report", projectId);
+                    setMenuOpen(false);
+                }}
+            />
+
+        )} */}
+
+        {menuOpen && (
+
+    <ProjectMenu
+
+        projectId={projectId}
+
+        saved={saved}
+
+        anchorRef={menuButtonRef}
+
+        onClose={() => {
+            setMenuOpen(false);
+        }}
+
+        onSave={() => {
+
+            handleSave();
+
+        }}
+
+        onDownload={(id) => {
+
+            console.log(
+                "Download:",
+                id
+            );
+
+        }}
+
+        onShare={(id) => {
+
+            console.log(
+                "Share:",
+                id
+            );
+
+        }}
+
+        onReport={(id) => {
+
+            console.log(
+                "Report:",
+                id
+            );
+
+        }}
+
+    />
+
+)}
+
+    </div>
 
         </div>
 

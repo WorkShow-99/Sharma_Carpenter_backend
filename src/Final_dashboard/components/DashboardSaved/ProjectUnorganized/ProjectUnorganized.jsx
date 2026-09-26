@@ -397,6 +397,7 @@ export default function UnorganizedProjects() {
     // ==========================================
 
     useEffect(() => {
+        console.log("this got render")
 
         if (
             !unorganizedInitialized &&
@@ -493,7 +494,7 @@ export default function UnorganizedProjects() {
                 },
                 {
                     root: null,
-                    rootMargin: "500px",
+                    rootMargin: "100px",
                     threshold: 0
                 }
             );
@@ -734,60 +735,82 @@ export default function UnorganizedProjects() {
     //             </div>
 
 
-                        <div className="project-grid">
+                    //     <div className="project-grid">
 
-                        {unorganizedProjects.map((project) => (
+                    //     {unorganizedProjects.map((project) => (
 
-                            <SavedProjectCard
-                                key={project._id}
+                    //         <SavedProjectCard
+                    //             key={project._id}
 
-                                projectId={project._id}
+                    //             projectId={project._id}
 
-                                projectTitle={project.title}
+                    //             projectTitle={project.title}
 
-                                projectImage={
-                                    project.media?.find(
-                                        media => media.isHero
-                                    )?.url ||
-                                    project.media?.[0]?.url ||
-                                    ""
-                                }
+                    //             projectImage={
+                    //                 project.media?.find(
+                    //                     media => media.isHero
+                    //                 )?.url ||
+                    //                 project.media?.[0]?.url ||
+                    //                 ""
+                    //             }
 
-                                ownerName={
-                                    `${project.professionalProfileId?.userId?.firstName || ""} ${
-                                        project.professionalProfileId?.userId?.lastName || ""
-                                    }`.trim() || "Unknown"
-                                }
+                    //             ownerName={
+                    //                 `${project.professionalProfileId?.userId?.firstName || ""} ${
+                    //                     project.professionalProfileId?.userId?.lastName || ""
+                    //                 }`.trim() || "Unknown"
+                    //             }
 
-                                ownerImage={
-                                    project.professionalProfileId?.userId
-                                        ?.profileImage?.url || ""
-                                }
+                    //             ownerImage={
+                    //                 project.professionalProfileId?.userId
+                    //                     ?.profileImage?.url || ""
+                    //             }
 
-                                ownerProfession={
-                                    project.professionalProfileId?.profession || ""
-                                }
+                    //             ownerProfession={
+                    //                 project.professionalProfileId?.profession || ""
+                    //             }
 
-                                projectDescription={project.description}
+                    //             projectDescription={project.description}
 
-                                projectCategory={project.category}
+                    //             projectCategory={project.category}
 
-                                projectTags={project.tags}
+                    //             projectTags={project.tags}
 
-                                directoryName="Unorganized"
+                    //             directoryName="Unorganized"
 
-                                onRemove={(projectId) => {
-                                    console.log("Remove:", projectId);
-                                }}
+                    //             onRemove={(projectId) => {
+                    //                 console.log("Remove:", projectId);
+                    //             }}
 
-                                onMove={(projectId) => {
-                                    console.log("Move:", projectId);
-                                }}
-                            />
+                    //             onMove={(projectId) => {
+                    //                 console.log("Move:", projectId);
+                    //             }}
+                    //         />
 
-                        ))}
+                    //     ))}
 
-                    </div>
+                    // </div>
+
+                    <div className="project-grid">
+
+    {unorganizedProjects.map((project) => (
+
+        <SavedProjectCard
+            key={project._id}
+            project={project}
+            directoryName="Unorganized"
+
+            onRemove={(projectId) => {
+                console.log("Remove:", projectId);
+            }}
+
+            onMove={(projectId) => {
+                console.log("Move:", projectId);
+            }}
+        />
+
+    ))}
+
+</div>
 
                 )}
 

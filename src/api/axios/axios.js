@@ -4,9 +4,10 @@ import axios from "axios";
 // ========================================
 // AUTH API
 // ========================================
+const APP_API_URL = import.meta.env.APP_API_URL || "http://localhost:8080";
 
 export const AuthApi = axios.create({
-    baseURL: "http://localhost:8080/api",
+    baseURL: `${APP_API_URL}/api`,
     headers: {
         "Content-Type": "application/json",
     },
@@ -23,7 +24,7 @@ const getAccessToken = () => {
 };
 
 const Api = axios.create({
-    baseURL: "http://localhost:8080/api",
+    baseURL: `${APP_API_URL}/api`,
     headers: {
         "Content-Type": "application/json",
     },

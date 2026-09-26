@@ -69,7 +69,7 @@ const handleProjectClick = (projectId) => {
     
     
     const clickhandler = () => {
-dispatch(
+        dispatch(
     addNotification({
 
         type: "error",

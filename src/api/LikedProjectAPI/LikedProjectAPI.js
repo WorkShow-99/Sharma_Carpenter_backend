@@ -6,9 +6,10 @@ import axios from "axios";
 
 import { logOut } from "../../../src/redux_store/User_redux/User_function";
 
+const APP_API_URL = import.meta.env.APP_API_URL || "http://localhost:8080";
 
 export const LikedProjectAPI = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: APP_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -46,7 +47,7 @@ LikedProjectAPI.interceptors.response.use(
 
       try {
         const refreshResponse = await axios.post(
-          "http://localhost:8080/api/auth/refresh",
+          `${APP_API_URL}/api/auth/refresh`,
           {},
           { withCredentials: true }
         );

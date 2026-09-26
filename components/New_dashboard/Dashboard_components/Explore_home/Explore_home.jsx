@@ -938,7 +938,7 @@ useEffect(() => {
              * Start loading before the
              * user actually reaches the bottom.
              */
-            rootMargin: "500px",
+            rootMargin: "100px",
 
             threshold: 0
         }

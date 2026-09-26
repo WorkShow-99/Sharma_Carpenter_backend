@@ -517,6 +517,12 @@
 
 
 
+
+
+
+
+
+
 import "./DashboardLikes.css";
 import { Heart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -575,7 +581,7 @@ export default function LikedProjects() {
             },
             {
                 root: null,
-                rootMargin: "500px",
+                rootMargin: "0px",
                 threshold: 0
             }
         );
@@ -608,6 +614,7 @@ export default function LikedProjects() {
             </div>
 
             {error && <p className="liked-error">{error}</p>}
+            
 
             <div className="liked-project-grid">
                 <LikedProjectHolder
@@ -615,6 +622,7 @@ export default function LikedProjects() {
                     Remove_from_lickedProjects={Remove_from_lickedProjects}
                 />
             </div>
+
 
             {loading && <p className="liked-loading">Loading liked projects...</p>}
 

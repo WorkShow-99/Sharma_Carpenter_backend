@@ -57,6 +57,8 @@ import {
 import DirectoryCard from "../DirectorCard/DirectoryCard.jsx";
 
 
+
+
 export default function ProjectDirectories() {
 
     const dispatch = useDispatch();
@@ -121,12 +123,12 @@ export default function ProjectDirectories() {
                     <div>
 
                         <h3>
-                            My Directories
+                            Your Directories
                         </h3>
 
-                        <p>
+                        {/* <p>
                             Organize your saved projects
-                        </p>
+                        </p> */}
 
                     </div>
 
@@ -166,7 +168,7 @@ export default function ProjectDirectories() {
                     <div>
 
                         <h3>
-                            My Directories
+                            Your Directories
                         </h3>
 
                         <p>
@@ -194,7 +196,7 @@ export default function ProjectDirectories() {
 
                         }}
                     >
-                        Try Again
+                        Try Again\
                     </button>
 
                 </div>
@@ -223,12 +225,12 @@ export default function ProjectDirectories() {
                 <div>
 
                     <h3>
-                        My Directories
+                        Your Directories
                     </h3>
 
-                    <p>
+                    {/* <p>
                         Organize your saved projects
-                    </p>
+                    </p> */}
 
                 </div>
 
@@ -330,6 +332,8 @@ export default function ProjectDirectories() {
                             key={directory._id}
                             directory={directory}
                             cardIndex={index}
+
+
                         />
                         ))}
 

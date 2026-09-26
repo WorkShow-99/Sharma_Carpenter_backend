@@ -17,6 +17,9 @@ import savedDirectoryReducer
 
 import savedProjectReducer
     from "./SavedProjects/SavedProject_reducer";
+
+
+import directoryProjectsReducer from "./Project_redux/SaveDirectoryProject/DirectoryProjects_reducer.js";
 const rootReducer = combineReducers({
   user: userReducer,
   // project_featch : Project_featch_reducer,
@@ -32,7 +35,9 @@ const rootReducer = combineReducers({
     savedDirectory:
         savedDirectoryReducer,
     savedProjects:
-        savedProjectReducer 
+        savedProjectReducer ,
+    directoryProjects:
+        directoryProjectsReducer
 });
 
 

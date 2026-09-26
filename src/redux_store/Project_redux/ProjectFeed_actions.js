@@ -5,6 +5,7 @@ import {
     RESET_PROJECT_FEED
 } from "./ProjectFeed_types";
 
+import API from "../../../src/api/CenteralAxios/CenteralAxios";
 
 // export const fetchProjectFeed = (
 //     cursor = null,
@@ -104,6 +105,7 @@ import {
 
 // };
 
+
 export const fetchProjectFeed = (
     cursor = null,
     limit = 5
@@ -169,28 +171,30 @@ export const fetchProjectFeed = (
             }
 
 
-            const accessToken = localStorage.getItem("accessToken");
 
-            const response = await fetch(
 
-                `http://localhost:8080/api/projects/feed?${params.toString()}`,
+            const response = await API.get(
 
-                {
-                    method: "GET",
-                    credentials: "include",
-                    headers: {
-                        "Authorization": `Bearer ${accessToken}`
-                    }
-                }
+                `/api/projects/feed?${params.toString()}`,
+
+                
 
             );
 
+            console.log(
+                "Project feed response:",
+                response
+            );
 
-            const data =
-                await response.json();
+               
 
 
-            if (!response.ok) {
+            const data  = response.data;
+
+
+
+            if (response.status !== 200) 
+             {
 
                 throw new Error(
                     data.message ||

@@ -32,6 +32,7 @@ import API from "../../api/CenteralAxios/CenteralAxios";
 import SavedProjectAxios from "../../api/SavedProjectAPI/SavedProjectAPI.js";
 import { LiveResponseType } from "firebase/ai";
 import { isRouteErrorResponse } from "react-router-dom";
+import { AppleIcon } from "lucide-react";
 
 
 // =====================================================
@@ -42,7 +43,7 @@ export const fetchUnorganizedProjects = (
     cursor = null,
     limit = 5
 ) => {
-        console.log("here in fetchUnorganizedProjects action");
+
 
     return async (dispatch) => {
 
@@ -83,7 +84,7 @@ export const fetchUnorganizedProjects = (
             //     }
             // );
 
-            const response  = await SavedProjectAxios.get(
+            const response  = await API.get(
                 `/api/project-directories/unorganized?${params.toString()}`
             );
 
@@ -214,31 +215,40 @@ export const fetchDirectoryProjects = (
             }
 
 
-            const response = await fetch(
-                `${API_URL}/${directoryId}/projects?${params.toString()}`,
-                {
-                    method: "GET",
 
-                    headers: {
-                        "Content-Type": "application/json",
-
-                        ...(token && {
-                            Authorization:
-                                `Bearer ${token}`
-                        })
-                    },
-
-                    credentials: "include"
-                }
+            const response = await API.get(
+                `/api/project-directories/${directoryId}/projects?${params.toString()}`
             );
 
+            console.log("this is the response from fetchDirectoryProjects:", response)
 
-            const data =
-                await response.json();
+            const data = await response.data;
+            console.log("this is the data from fetchDirectoryProjects:", data)
+
+            // const response = await fetch(
+            //     `${API_URL}/${directoryId}/projects?${params.toString()}`,
+            //     {
+            //         method: "GET",
+
+            //         headers: {
+            //             "Content-Type": "application/json",
+
+            //             ...(token && {
+            //                 Authorization:
+            //                     `Bearer ${token}`
+            //             })
+            //         },
+
+            //         credentials: "include"
+            //     }
+            // );
 
 
-            if (!response.ok) {
+            // const data =
+            //     await response.json();
 
+
+                if (response.status !== 200 || !data.success) {
                 throw new Error(
                     data.message ||
                     "Failed to fetch directory projects"
@@ -293,10 +303,114 @@ export const fetchDirectoryProjects = (
     };
 };
 
+// export const fetchDirectoryProjectss = (
+//     directoryId,
+//     cursor = null,
+//     limit = 10
+// ) => {
 
+//     return async (dispatch) => {
+
+//         if (!directoryId) {
+//             throw new Error(
+//                 "Directory ID is required"
+//             );
+//         }
+
+//         dispatch({
+//             type: FETCH_DIRECTORY_PROJECTS_REQUEST,
+//             payload: directoryId
+//         });
+
+//         try {
+
+//             const token =
+//                 localStorage.getItem("accessToken");
+
+//             const params =
+//                 new URLSearchParams();
+
+//             params.append("limit", limit);
+
+//             if (cursor) {
+//                 params.append("cursor", cursor);
+//             }
+
+//             const response = await fetch(
+//                 `${API_URL}/${directoryId}/projects?${params.toString()}`,
+//                 {
+//                     method: "GET",
+
+//                     headers: {
+//                         "Content-Type":
+//                             "application/json",
+
+//                         ...(token && {
+//                             Authorization:
+//                                 `Bearer ${token}`
+//                         })
+//                     },
+
+//                     credentials: "include"
+//                 }
+//             );
+
+//             const data =
+//                 await response.json();
+
+//             if (!response.ok) {
+//                 throw new Error(
+//                     data.message ||
+//                     "Failed to fetch directory projects"
+//                 );
+//             }
+
+//             dispatch({
+//                 type:
+//                     FETCH_DIRECTORY_PROJECTS_SUCCESS,
+
+//                 payload: {
+//                     directoryId,
+
+//                     projects:
+//                         data.projects || [],
+
+//                     nextCursor:
+//                         data.nextCursor || null,
+
+//                     hasMore:
+//                         data.hasMore ?? false,
+
+//                     reset:
+//                         !cursor
+//                 }
+//             });
+
+//             return data;
+
+//         } catch (error) {
+
+//             dispatch({
+//                 type:
+//                     FETCH_DIRECTORY_PROJECTS_FAILURE,
+
+//                 payload: {
+//                     directoryId,
+
+//                     error:
+//                         error.message
+//                 }
+//             });
+
+//             throw error;
+//         }
+//     };
+// };
 // =====================================================
 // SAVE PROJECT
 // =====================================================
+
+
 
 export const saveProject = (
     projectId,
@@ -312,63 +426,92 @@ export const saveProject = (
 
         try {
 
-            const token =
-                localStorage.getItem("accessToken");
+            //     `${API_URL}/${projectId}/save`,
+            //     {
+            //         method: "POST",
 
+            //         headers: {
+            //             "Content-Type": "application/json",
 
-            const response = await fetch(
-                `${API_URL}/${projectId}/save`,
+            //             ...(token && {
+            //                 Authorization:
+            //                     `Bearer ${token}`
+            //             })
+            //         },
+
+            //         credentials: "include",
+
+            //         body: JSON.stringify({
+            //             directoryId
+            //         })
+            //     }
+            // );
+
+            const response = await API.post(
+                `/api/project-directories/${projectId}/save`,
                 {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json",
-
-                        ...(token && {
-                            Authorization:
-                                `Bearer ${token}`
-                        })
-                    },
-
-                    credentials: "include",
-
-                    body: JSON.stringify({
-                        directoryId
-                    })
+                    directoryId
                 }
             );
 
+            const data = response.data;
 
-            const data =
-                await response.json();
-
-
-            if (!response.ok) {
+            if (
+                ![200, 201].includes(response.status) ||
+                data?.success !== true
+            ) {
 
                 throw new Error(
-                    data.message ||
+                    data?.message ||
                     "Failed to save project"
                 );
             }
 
 
+
+            // dispatch({
+            //     type: SAVE_PROJECT_SUCCESS,
+
+            //     payload: data.savedProject
+            // });
+
             dispatch({
-                type: SAVE_PROJECT_SUCCESS,
+                        type: SAVE_PROJECT_SUCCESS,
+                        payload: data.savedProject
+                    });
 
-                payload: data.savedProject
-            });
+                    if (directoryId) {
+                        await dispatch(
+                            fetchDirectoryProjects(directoryId, null, 10)
+                        );
+                    } else {
+                        await dispatch(
+                            fetchUnorganizedProjects(null, 10)
+                        );
+                    }
 
+            dispatch(addNotification({
+                type: "success",
+                message: "Project saved successfully."
+            }));
 
             return data;
 
 
         } catch (error) {
 
+            console.log("Error in saveProject action:", error);
+             dispatch(addNotification({
+                type: "error",
+                message: "Project is already saved."
+            }));
+
             dispatch({
                 type: SAVE_PROJECT_FAILURE,
 
                 payload: error.message
             });
+           
 
 
             throw error;

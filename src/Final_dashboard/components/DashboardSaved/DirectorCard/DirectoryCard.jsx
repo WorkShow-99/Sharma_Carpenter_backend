@@ -1241,7 +1241,9 @@ import "./DirectoryCard.css";
 export default function DirectoryCard({
     directory,
     onAddProject,
-    cardIndex = 0
+    cardIndex = 0,
+
+
 }) {
 
 
@@ -1256,7 +1258,7 @@ export default function DirectoryCard({
 
       
 const cardVariant =
-    cardIndex % 6;
+    cardIndex % 4;
 
     // =========================================
     // ROUTER
@@ -1386,6 +1388,18 @@ const cardVariant =
 // FETCH PROJECT PREVIEW
 // =========================================
 
+
+// useEffect(() => {
+
+//     if (!directoryId) {
+//         return;
+//     }
+
+//     return () => {
+//         setDirectoryMode(false);
+//     };
+// }, [directoryId]);
+
 useEffect(() => {
 
     if (!directoryId) {
@@ -1457,19 +1471,20 @@ useEffect(() => {
     // OPEN DIRECTORY
     // =========================================
 
-    const handleDirectoryClick =
-        () => {
+    // const handleDirectoryClick =
+    //     () => {
 
-            if (!directoryId) {
-                return;
-            }
+    //         if (!directoryId) {
+    //             return;
+    //         }
 
+    //         setDirectoryMode(true);
 
-            navigate(
-                `/dashboard/saved/${directoryId}`
-            );
+    //         navigate(
+    //             `directory/${directoryId}`
+    //         );
 
-        };
+    //     };
 
 
     // =========================================
@@ -1520,8 +1535,10 @@ useEffect(() => {
             }
 
 
+
             navigate(
-                `/dashboard/saved/${directoryId}`,
+                `directory/${directoryId}`,
+            
                 {
                     state: {
                         selectedProjectId: projectId
@@ -1577,7 +1594,7 @@ useEffect(() => {
                     directory-card-empty
                 "
                 onClick={
-                    handleDirectoryClick
+                    handleProjectClick
                 }
             >
 
@@ -1637,7 +1654,7 @@ useEffect(() => {
         // >
     <article
         className={`directory-card directory-card-${cardVariant}`}
-        onClick={handleDirectoryClick}
+        onClick={handleProjectClick}
     >
 
             {/* =================================
@@ -1725,7 +1742,7 @@ useEffect(() => {
 
                 {loading && (
 
-                    <>
+                    <div div>
 
                         <div
                             className="
@@ -1755,7 +1772,7 @@ useEffect(() => {
                             "
                         />
 
-                    </>
+                    </div>
 
                 )}
 

@@ -11,7 +11,7 @@ import {Provider} from "react-redux";
 import store from "./redux_store/main_store";
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
 <Provider store={store}>
 
     <BrowserRouter>

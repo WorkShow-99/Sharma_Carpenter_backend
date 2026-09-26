@@ -55,7 +55,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 // -----------New_DashBoard.jsx-----------
 import {ExploreHome} from "../components/New_dashboard/Dashboard_components/Explore_home/Explore_home";
 
-import Idea from "../components/New_dashboard/Dashboard_components/ideas/ideas.jsx";
+
 import Create from "../components/New_dashboard/Dashboard_components/Create/Create";
 import Messages from "../components/New_dashboard/Dashboard_components/Messages/Messages";
 import Notifications from "../components/New_dashboard/Dashboard_components/Notification/Notification";
@@ -79,6 +79,9 @@ import ProjectDetails from "../components/ProjectDetail/ProjectDetail";
 // ------------------ProjectStudio.jsx----------------÷÷
 import ProjectStudio from "../components/ProjectStudio/ProjectStudio";
 import GlobalNotification from "../components/GlobalNotification/GlobalNotification";
+import {DirectoryUnorganizedHolder}  from "../src/Final_dashboard/components/DashboardSaved/Directory_Unorganized/DirecotryUnorganizedHolder.jsx";
+
+import Directory from "../src/Final_dashboard/components/DashboardSaved/ProjectDirectory/DirectDirectory/DirectDirectory";
 const Layout = () => {
   return (
     <>
@@ -90,7 +93,7 @@ const Layout = () => {
 
 function App() {
   const dispatch = useDispatch();
-   dispatch(loginRequest());
+
 
   
 
@@ -102,101 +105,182 @@ function App() {
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
 
+
+  //   const checkAuthState = async () => {
+  //     try {
+
+
+  //        const accessToken =
+  //               localStorage.getItem("accessToken");
+
+  //           if (!accessToken) {
+
+  //               dispatch(logOut());
+  //               // console.log("No access token found, user logged out");
+  //               throw new Error("No access token found");
+
+
+  //           }
+  //         // console.log("Access Token found, checking user:", accessToken);
+       
+  //       const response = await getCurrentUser(accessToken);
+
+
+  //       if (response) {
+  //         const {
+  //           username,
+  //           email,
+  //           profileImage = response.user.profileImage.url,
+  //           uid = response.user._id,
+  //         } = response.user;
+  //         const isProfessional = response.user.role !== "customer";
+
+  //         dispatch(
+  //           loginSuccess({
+  //             user: { username, email, profileImage,uid, isProfessional },
+  //           })
+  //         );
+  //       } else {
+  //         dispatch(logOut());
+  //       }
+
+  //     } catch (error) {
+  //         console.error("Error. :", error);
+  //       try {
+  //         const response = await refreshAccessToken();
+          
+  //         if (response.status !== 200 || response.data.success !== true) {
+  //           throw new Error("Failed to refresh access token");
+  //         }
+  //         // console.log("Access token refreshed successfully:", response);
+  //         localStorage.setItem("accessToken", response.data.accessToken);
+
+  //         const currentUser = await getCurrentUser(response.data.accessToken);
+
+  //         if (currentUser) {
+  //           const { username= currentUser.user.username, email = currentUser.user.email, profileImage = currentUser.user.profileImage.url, uid = currentUser.user._id } = currentUser;
+
+  //           console.log(username, email, profileImage, uid);
+  //           dispatch(
+  //             loginSuccess({
+  //               user: { username, email, profileImage, uid },
+  //             })
+  //           );
+  //         } else {
+  //           dispatch(logOut());
+  //         }
+
+  //       }
+  //       catch (refreshError) {
+  //               console.error(
+  //                 "Error refreshing access token:",
+  //                 refreshError
+  //               );
+  //               localStorage.removeItem(
+  //                         "accessToken"
+  //                     );
+
+
+  //               dispatch(logOut());
+
+  //             }
+
+        
+  //     }
+
+  //   };
+
+  //   checkAuthState();
+
+  //   // dispatch(initializeAuth());
+
+
+  // }, [dispatch]);
+
+
+useEffect(() => {
 
     const checkAuthState = async () => {
-      try {
 
+        try {
 
-         const accessToken =
+            const accessToken =
                 localStorage.getItem("accessToken");
+
 
             if (!accessToken) {
 
                 dispatch(logOut());
-                // console.log("No access token found, user logged out");
-                throw new Error("No access token found");
 
+                return;
 
             }
-          // console.log("Access Token found, checking user:", accessToken);
-       
-        const response = await getCurrentUser(accessToken);
 
 
-        if (response) {
-          const {
-            username,
-            email,
-            profileImage = response.user.profileImage.url,
-            uid = response.user._id,
-          } = response.user;
-          const isProfessional = response.user.role !== "customer";
+            const response =
+                await getCurrentUser();
 
-          dispatch(
-            loginSuccess({
-              user: { username, email, profileImage,uid, isProfessional },
-            })
-          );
-        } else {
-          dispatch(logOut());
-        }
 
-      } catch (error) {
-          console.error("Error. :", error);
-        try {
-          const response = await refreshAccessToken();
-          
-          if (response.status !== 200 || response.data.success !== true) {
-            throw new Error("Failed to refresh access token");
-          }
-          // console.log("Access token refreshed successfully:", response);
-          localStorage.setItem("accessToken", response.data.accessToken);
-
-          const currentUser = await getCurrentUser(response.data.accessToken);
-
-          if (currentUser) {
-            const { username= currentUser.user.username, email = currentUser.user.email, profileImage = currentUser.user.profileImage.url, uid = currentUser.user._id } = currentUser;
-
-            console.log(username, email, profileImage, uid);
-            dispatch(
-              loginSuccess({
-                user: { username, email, profileImage, uid },
-              })
-            );
-          } else {
-            dispatch(logOut());
-          }
-
-        }
-        catch (refreshError) {
-                console.error(
-                  "Error refreshing access token:",
-                  refreshError
-                );
-                localStorage.removeItem(
-                          "accessToken"
-                      );
-
+            if (!response?.user) {
 
                 dispatch(logOut());
 
-              }
+                return;
 
-        
-      }
+            }
+
+
+            const userData =
+                response.user;
+
+
+            const {
+                username,
+                email,
+                profileImage,
+                _id
+            } = userData;
+
+
+            const isProfessional =
+                userData.role !== "customer";
+
+
+            dispatch(
+                loginSuccess({
+                    user: {
+                        username,
+                        email,
+                        profileImage:
+                            profileImage?.url || "",
+                        uid: _id,
+                        isProfessional
+                    }
+                })
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Authentication check failed:",
+                error
+            );
+
+
+            dispatch(logOut());
+
+        }
 
     };
 
+
     checkAuthState();
 
-    // dispatch(initializeAuth());
-
-
-  }, [dispatch]);
-
+}, [dispatch]);
 
   // if (user_data.loading) {
   //     return (
@@ -281,11 +365,25 @@ function App() {
                                     element={<MyProjects />}
                                 />
 
-                                  <Route
+                                  {/* <Route
                                       path="saved"
                                       element={<SavedProjects />}
-                                  />
+                                  /> */}
+                                <Route
+                                    path="saved"
+                                    element={<SavedProjects />}
+                                >
+                                     <Route
+                                        index
+                                        element={<DirectoryUnorganizedHolder />}
+                                    />
 
+                                    <Route
+                                        path="directory/:directoryId"
+                                        element={<Directory />}
+                                    />
+
+                                </Route>
                                   <Route
                                       path="liked"
                                       element={<LikedProjects />}
@@ -322,10 +420,10 @@ function App() {
         <Route
           path="/old_dashboard"
           element={
-          <ProtectedRoute>
+
           <DashBoard />
 
-          </ProtectedRoute>
+
         }
         />
 
