@@ -1,0 +1,10 @@
+stage:
+  - test
+
+
+testing:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - npm install
+    - npm test
